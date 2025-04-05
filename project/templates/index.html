@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>תמלול טיקטוק</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+
+    <h1>🎤 תמלול סרטון מטיקטוק</h1>
+
+    <input type="text" id="videoUrl" placeholder="please enter url">
+    <br>
+    <button onclick="transcribe()">תמלל</button>
+
+    <div id="result">כאן יופיע התמלול...</div>
+
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
