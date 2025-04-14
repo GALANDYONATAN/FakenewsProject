@@ -2,19 +2,22 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>תמלול טיקטוק</title>
+    <title>TikTok Transcription</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 </head>
 <body>
+<div class="overlay">
+    
+    <h1>🎤 Tik Tok Video Transcription Tool </h1>
 
-    <h1>🎤 תמלול סרטון מטיקטוק</h1>
-
-    <input type="text" id="videoUrl" placeholder="please enter url">
+    <input type="text" id="videoUrl" placeholder="🔗 Insert TikTok video URL">
     <br>
-    <button onclick="transcribe()">תמלל</button>
+    <button onclick="transcribe()">Transcribe</button>
 
-    <div id="result">כאן יופיע התמלול...</div>
+    <div id="result">Please wait, this may take a few moments</div>
 
     <script src="{{ url_for('static', filename='main.js') }}"></script>
+
+</div>
 </body>
 </html>
