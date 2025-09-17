@@ -12,6 +12,7 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
+
 @app.route('/transcribe', methods=['POST'])
 def transcribe():
     try:
@@ -48,3 +49,5 @@ def open_browser():
 if __name__ == '__main__':
     Timer(1, open_browser).start()
     app.run(debug=True,port=5001)
+
+
