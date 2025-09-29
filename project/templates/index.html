@@ -3,22 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>TikTok Transcription</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 </head>
 <body>
+
+
+    
+
 <div class="overlay">
    
-    
     <h1> Tik Tok Video Transcription Tool </h1>
-
     <input type="text" id="videoUrl" placeholder="🔗 Insert TikTok video URL">
-    <br>
     <button onclick="transcribe()">Transcribe</button>
-
     <div id="result">Please wait, this may take a few moments</div>
+</div>
 
-    <script src="{{ url_for('static', filename='main.js') }}"></script>
 
+
+<div class="overlay">
+   
+    <h1> Tik Tok Text Transcription Tool </h1>
+    <input type="text" id="Text" placeholder="🔗 Insert TikTok Text">
+    <button onclick="send()">Send Text</button>
+    <div id="Textresult">Please wait, this may take a few moments</div>  
 </div>
 </body>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="{{ url_for('static', filename='js/send.js') }}"></script>
+
 </html>

@@ -2,15 +2,69 @@ from flask import Flask, render_template, request, jsonify
 import yt_dlp, ffmpeg, whisper, ssl, os
 import webbrowser
 from threading import Timer
+import pandas as pd
+import numpy as np
+
+# Import packages for data visualization
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Import packages for data preprocessing
+from sklearn.feature_extraction.text import CountVectorizer
+
+# Import packages for data modeling
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.metrics import classification_report, accuracy_score, precision_score, \
+recall_score, f1_score, confusion_matrix, ConfusionMatrixDisplay
+
+from sklearn.ensemble import RandomForestClassifier
+from xgboost import XGBClassifier
+from xgboost import plot_importance
 
 # טיפול בתעודת SSL
 ssl._create_default_https_context = ssl._create_unverified_context
 
 app = Flask(__name__)
 
-@app.route('/')
+
+
+@app.route("/")
+def home():
+    return render_template("home.html")
+
+@app.route("/index")
 def index():
     return render_template("index.html")
+
+@app.route("/docs")
+def docs():
+    return render_template("docs.html")
+
+@app.route("/presentation")
+def presentation():
+    return render_template("presentation.html")
+
+
+
+@app.route('/send', methods=['POST'])
+def send():
+    df = pd.read_csv("tiktok_predictions_full.csv")
+    data=request.get_json(force=True)
+    text = (data.get("Text") or "").strip()
+    if not text:
+         return jsonify({"error": "No text received"}), 400
+    row = df[df["text_snippet"].str.strip() == text]
+    if row.empty:
+        return jsonify({"error": "Text not found in dataset"}), 404
+        # לוקחים את הערכים מהשורה הראשונה שנמצאה
+    row = row.iloc[0]
+    return jsonify({
+        "Fake news check": str(row["Fake news check"]),
+        "Reliability": float(row["Reliability"]),
+        "Unreliability": float(row["Unreliability"])
+    })
+#if __name__ == "__main__":
+    #app.run(debug=True)
 
 
 @app.route('/transcribe', methods=['POST'])
