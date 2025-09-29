@@ -45,10 +45,13 @@ def presentation():
     return render_template("presentation.html")
 
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))   # התיקייה של app.py (כלומר project/)
+CSV_PATH = os.path.join(BASE_DIR, "tiktok_predictions_full.csv")
+df = pd.read_csv(CSV_PATH)
 
 @app.route('/send', methods=['POST'])
 def send():
-    df = pd.read_csv("tiktok_predictions_full.csv")
+   
     data=request.get_json(force=True)
     text = (data.get("Text") or "").strip()
     if not text:
