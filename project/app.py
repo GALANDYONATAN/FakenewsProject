@@ -3,23 +3,7 @@ import yt_dlp, ffmpeg, whisper, ssl, os
 import webbrowser
 from threading import Timer
 import pandas as pd
-import numpy as np
 
-# Import packages for data visualization
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-# Import packages for data preprocessing
-from sklearn.feature_extraction.text import CountVectorizer
-
-# Import packages for data modeling
-from sklearn.model_selection import train_test_split, GridSearchCV
-from sklearn.metrics import classification_report, accuracy_score, precision_score, \
-recall_score, f1_score, confusion_matrix, ConfusionMatrixDisplay
-
-from sklearn.ensemble import RandomForestClassifier
-from xgboost import XGBClassifier
-from xgboost import plot_importance
 
 # טיפול בתעודת SSL
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -70,6 +54,7 @@ def send():
     #app.run(debug=True)
 
 
+
 @app.route('/transcribe', methods=['POST'])
 def transcribe():
     try:
@@ -106,5 +91,5 @@ def open_browser():
 if __name__ == '__main__':
     Timer(1, open_browser).start()
     app.run(debug=True,port=5001)
-
-
+#if __name__ == '__main__':
+    #app.run(host="0.0.0.0", port=5000)

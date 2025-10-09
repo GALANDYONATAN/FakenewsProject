@@ -18,3 +18,5 @@ function transcribe() {
         document.getElementById('result').innerText = "❌ Error during process: " + err;
 });
 }
+
+
