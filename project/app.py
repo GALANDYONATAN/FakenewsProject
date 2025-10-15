@@ -20,6 +20,22 @@ df = pd.read_csv(CSV_PATH)
 def home():
     return render_template("home.html")
 
+
+
+
+@app.route("/textpage")
+def textpage():
+    return render_template("textpage.html")
+
+
+@app.route("/videopage")
+def videopage():
+    return render_template("videopage.html")
+
+
+
+
+
 @app.route("/index")
 def index():
     return render_template("index.html")

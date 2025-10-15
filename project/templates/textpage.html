@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>TikTok Transcription</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/textpage.css') }}">
+</head>
+<body>
+
+    <div class="backtohp">
+        <a href="{{ url_for('home') }}">
+          <button>Back to Home</button>
+        </a>
+        <a href="{{ url_for('index') }}">
+          <button>Back to index</button>
+        </a>
+      </div>
+
+
+    
+    
+
+
+<div class="overlay">
+   
+    <h1> Tik Tok Text Transcription Tool </h1>
+    <input type="text" id="Text" placeholder="🔗 Insert TikTok Text">
+    <button onclick="send()">Send Text</button>
+    <div id="Textresult">Please wait, this may take a few moments</div>  
+</div>
+</body>
+<script src="{{ url_for('static', filename='js/send.js') }}"></script>
+
+</html>

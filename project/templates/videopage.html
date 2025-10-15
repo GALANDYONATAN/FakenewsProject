@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>TikTok Transcription</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/videopage.css') }}">
+</head>
+<body>
+
+  <div class="backtohp">
+    <a href="{{ url_for('home') }}">
+      <button>Back to Home</button>
+    </a>
+    <a href="{{ url_for('index') }}">
+      <button>Back to index</button>
+    </a>
+  </div>
+    
+
+<div class="overlay">
+   
+    <h1> Tik Tok Video Transcription Tool </h1>
+    <input type="text" id="videoUrl" placeholder="🔗 Insert TikTok video URL">
+    <button onclick="transcribe()">Transcribe</button>
+    <div id="result">Please wait, this may take a few moments</div>
+</div>
+
+
+</body>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</html>

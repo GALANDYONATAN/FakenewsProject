@@ -17,25 +17,21 @@ body {
 }
 
 .overlay {
-  background-color: rgba(255, 255, 255, 0.5); /* 60% אטימות */
-
+  background-color: rgba(255, 255, 255, 0.5); 
   border-radius: 20px;
   padding: 40px 30px;
- 
   max-width: 600px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   text-align: center;
   box-sizing: border-box;
-  transition: transform 0.3s ease , box-shadow 0.3s ease;
-  width: 400px;   /* אפשר לבחור רוחב קבוע */
-  height:400px;  /* אותו גובה */
+  transition: transform 0.3s ease , box-shadow 0.3s ease;        /* נשאר רספונסיבי */
+  min-height: 400px;  /* גובה מינימלי, יגדל עם תוכן */
   margin: auto;
 
   display: flex;
-  flex-direction: column; /* אחד מתחת לשני */
-  justify-content: center;
-  gap: 35px;   
- 
+  flex-direction: column;
+  gap: 35px;
+  justify-content: flex-start; /* לא למרכז אנכית – שיהיה מקום לכותרת ותוכן */
 
 }
 
@@ -45,9 +41,9 @@ body {
 }
 
 h1 {
-  font-size: 28px;
+  font-size: 20px;
   margin-bottom: 20px;
-  color:rgba(0, 0, 0, 0.686);
+  color:rgba(0, 0, 0, 0.779);
 }
 
 
@@ -60,13 +56,14 @@ input[type="text"] {
   box-sizing: border-box;
   margin-bottom: 20px;
   text-align: center;
+  border:none;
 }
 
 
 button {
   padding: 12px 24px;
   font-size: 16px;
-  background-color: #2c3e50;
+  background-color: #2c4650f3;
   color: white;
   border: none;
   border-radius: 8px;
