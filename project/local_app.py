@@ -30,7 +30,7 @@ def presentation():
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))   # התיקייה של app.py (כלומר project/)
-CSV_PATH = os.path.join(BASE_DIR, "tiktok_predictions_full.csv")
+CSV_PATH = os.path.join(BASE_DIR, "tik_tok_predictions_full_backup.csv")
 df = pd.read_csv(CSV_PATH)
 
 @app.route('/send', methods=['POST'])
@@ -86,10 +86,10 @@ def transcribe():
 
 # תוספת לפתיחת הדפדפן אוטומטית
 def open_browser():
-    webbrowser.open_new("http://0.0.0.0:5001/")
+    webbrowser.open_new("http://0.0.0.0:5002/")
 
 if __name__ == '__main__':
     Timer(1, open_browser).start()
-    app.run(debug=True,port=5001)
+    app.run(debug=True,port=5002)
 #if __name__ == '__main__':
     #app.run(host="0.0.0.0", port=5000)

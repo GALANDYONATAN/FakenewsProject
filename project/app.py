@@ -12,7 +12,7 @@ whisper_model = whisper.load_model("base")
 
 # ==== CSV load ====
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-CSV_PATH = os.path.join(BASE_DIR, "tiktok_predictions_full.csv")
+CSV_PATH = os.path.join(BASE_DIR, "tik_tok_predictions_full_backup.csv")
 df = pd.read_csv(CSV_PATH)
 
 # ==== Routes ====
