@@ -13,6 +13,7 @@ body {
   justify-content: center;
   align-items: center;
   gap:40px;
+  margin-bottom: 40px;
   
 }
 
@@ -40,24 +41,48 @@ body {
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.25); /* צל חזק יותר */
 }
 
+
 h1 {
-  font-size: 20px;
-  margin-bottom: 20px;
-  color:rgba(0, 0, 0, 0.779);
+  font-size: clamp(15px, 2vw, 30px);  /* גודל גמיש בין 24px ל-40px */
+  margin-bottom: 20px;                /* רווח מתחת */
+  font-weight: 700;                   /* כותרת מודגשת */
+  color: rgba(0, 0, 0, 0.85);         /* אפור כהה במקום שחור מלא */
+  letter-spacing: 1px;                /* רווח קטן בין אותיות */
+  line-height: 1.2;                   /* גובה שורה נעים לעין */
+  text-align: center;                 /* מרכז את הכותרת */
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1); /* צל עדין לטקסט */
+  transition: all 0.3s ease;          /* אנימציה חלקה */
+  font-family: Verdana;
 }
 
 
 input[type="text"] {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  border-radius: 8px;
-  border: 2px solid #007bff;
-  box-sizing: border-box;
-  margin-bottom: 20px;
-  text-align: center;
-  border:none;
+  width: 100%;                  /* תופס את כל הרוחב */
+  padding: 12px 20px;           /* ריווח פנימי נוח */
+  font-size: 16px;              /* גודל טקסט */
+  border-radius: 25px;          /* פינות עגולות כמו גוגל */
+  border: 1px solid #ddd;       /* מסגרת עדינה */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* צל עדין */
+  box-sizing: border-box;       /* חישוב נכון של רוחב */
+  margin-bottom: 20px;          /* רווח מתחת */
+  text-align: left;             /* הסמן והטקסט יתחילו מצד שמאל */
+  outline: none;                /* הסרת הקו הכחול ברגע שלוחצים */
+  transition: all 0.2s ease;    /* מעבר חלק כשיש שינוי */
 }
+
+
+input[type="text"]:hover {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+}
+
+
+/* כשמתמקדים בתיבה (לוחצים/מתחילים לכתוב) */
+input[type="text"]:focus {
+  border: 1px solid #aaa;                  /* המסגרת נהיית אפורה כהה יותר */
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);   /* הצל נהיה חזק יותר */
+}
+
+
 
 
 button {
