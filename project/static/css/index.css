@@ -151,38 +151,19 @@ button:hover {
  font-weight: bold;
 }
 
-
 .sidebar {
-  position: fixed;        /* נשאר תמיד במקום */
-  top: 20px;              /* 20px מהחלק העליון */
-  right: 20px;            /* 20px מהצד הימני */
-  background: rgba(0, 0, 0, 0.7);
-  padding: 15px 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-}
-
-.sidebar ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.sidebar li {
-  margin: 10px 0;   /* רווח בין לינקים בטור */
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: row; /* עושה אותם בטור */
+  gap: 10px;              /* רווח ביניהם */
 }
 
 .sidebar a {
-  color: white;
-  text-decoration: none;
+  color: white;             /* צבע טקסט */
   font-size: 16px;
-  transition: 0.3s;
-  display: block;   /* כל לינק שורה שלמה */
+  text-decoration: none;    /* בלי קו תחתון */
+  transition: color 0.3s;
 }
-
-.sidebar a:hover {
-  color: #00bfff;
-}
-
-
 
