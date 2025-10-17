@@ -40,6 +40,14 @@ def docs():
 def presentation():
     return render_template("presentation.html")
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+@app.route("/howto")
+def howto():
+    return render_template("howto.html")
+
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))   # התיקייה של app.py (כלומר project/)
 CSV_PATH = os.path.join(BASE_DIR, "tik_tok_predictions_full_backup.csv")

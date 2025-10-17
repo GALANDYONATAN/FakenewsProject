@@ -12,7 +12,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap:40px;
+  
   
 }
 
@@ -29,12 +29,13 @@ body {
   transition: transform 0.3s ease , box-shadow 0.3s ease;
   width: 400px;   /* אפשר לבחור רוחב קבוע */
   height:400px;  /* אותו גובה */
-  margin: auto;
-
+  margin:auto;
   display: flex;
   flex-direction: column; /* אחד מתחת לשני */
   justify-content: center;
-  gap: 35px;   
+  gap: 35px;
+  margin-bottom: 130px; 
+  
 
 }
 
@@ -110,4 +111,19 @@ button:hover {
   box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
 
 }
+
+
+footer {
+  background-color: rgba(0, 0, 0, 0.8);  /* רקע כהה */
+  color: white;                          /* טקסט לבן */
+  text-align: center;                    /* מרכז את הטקסט */
+  padding: 8px 15px; 
+  font-size: 14px;
+  position: fixed;                       /* מקבע לתחתית */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+ 
+}
+
 

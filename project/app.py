@@ -46,6 +46,21 @@ def docs():
 def presentation():
     return render_template("presentation.html")
 
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+@app.route("/howto")
+def howto():
+    return render_template("howto.html")
+
+
+
+
+
+
+
 @app.route('/send', methods=['POST'])
 def send():
     data = request.get_json(force=True)

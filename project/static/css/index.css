@@ -36,6 +36,7 @@ body {
   flex-direction: column; /* אחד מתחת לשני */
   justify-content: center;
   gap: 35px;   
+  margin-top:-60px;
  
 
 }
@@ -143,11 +144,45 @@ button:hover {
 
 .title{
   color:white;
-  margin-top: 0px;   /* מוריד את הכותרת למטה */
+  margin-top: -40px;   /* מוריד את הכותרת למטה */
   text-align: center; /* מוודא שהיא במרכז */
  font-size: 50px;
  font-family: Verdana;
  font-weight: bold;
 }
+
+
+.sidebar {
+  position: fixed;        /* נשאר תמיד במקום */
+  top: 20px;              /* 20px מהחלק העליון */
+  right: 20px;            /* 20px מהצד הימני */
+  background: rgba(0, 0, 0, 0.7);
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar li {
+  margin: 10px 0;   /* רווח בין לינקים בטור */
+}
+
+.sidebar a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  transition: 0.3s;
+  display: block;   /* כל לינק שורה שלמה */
+}
+
+.sidebar a:hover {
+  color: #00bfff;
+}
+
 
 
