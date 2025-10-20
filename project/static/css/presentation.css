@@ -18,21 +18,27 @@ body {
 }
 
 .overlay {
-  background-color: rgba(255, 255, 255, 0.5); 
+  background-color: rgba(255, 255, 255, 0.5); /* 60% אטימות */
+
   border-radius: 20px;
   padding: 40px 30px;
+ 
   max-width: 600px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   text-align: center;
   box-sizing: border-box;
-  transition: transform 0.3s ease , box-shadow 0.3s ease;        /* נשאר רספונסיבי */
-  min-height: 400px;  /* גובה מינימלי, יגדל עם תוכן */
+  transition: transform 0.3s ease , box-shadow 0.3s ease;
+  width: 400px;   /* אפשר לבחור רוחב קבוע */
+  height:400px;  /* אותו גובה */
   margin: auto;
 
   display: flex;
-  flex-direction: column;
-  gap: 35px;
-  justify-content: flex-start; /* לא למרכז אנכית – שיהיה מקום לכותרת ותוכן */
+  flex-direction: column; /* אחד מתחת לשני */
+  justify-content: center;
+  gap: 35px;   
+  margin-top:-60px;
+  margin-top: 100px;
+ 
 
 }
 
@@ -45,58 +51,45 @@ h1 {
   font-size: clamp(15px, 2vw, 30px);  /* גודל גמיש בין 24px ל-40px */
   margin-bottom: 20px;                /* רווח מתחת */
   font-weight: 700;                   /* כותרת מודגשת */
-  color: rgba(0, 0, 0, 0.85);         /* אפור כהה במקום שחור מלא */
+  color:#2C3E50;     /* אפור כהה במקום שחור מלא */
   letter-spacing: 1px;                /* רווח קטן בין אותיות */
   line-height: 1.2;                   /* גובה שורה נעים לעין */
   text-align: center;                 /* מרכז את הכותרת */
   text-shadow: 0 2px 4px rgba(0,0,0,0.1); /* צל עדין לטקסט */
   transition: all 0.3s ease;          /* אנימציה חלקה */
-  font-family: Verdana;
+  font-family:Verdana;
+  font-weight: bold;
 }
 
 
 input[type="text"] {
-  width: 100%;                  /* תופס את כל הרוחב */
-  padding: 12px 20px;           /* ריווח פנימי נוח */
-  font-size: 16px;              /* גודל טקסט */
-  border-radius: 25px;          /* פינות עגולות כמו גוגל */
-  border: 1px solid #ddd;       /* מסגרת עדינה */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* צל עדין */
-  box-sizing: border-box;       /* חישוב נכון של רוחב */
-  margin-bottom: 20px;          /* רווח מתחת */
-  text-align: left;             /* הסמן והטקסט יתחילו מצד שמאל */
-  outline: none;                /* הסרת הקו הכחול ברגע שלוחצים */
-  transition: all 0.2s ease;    /* מעבר חלק כשיש שינוי */
-}
-
-input[type="text"]:hover {
-  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
-}
-
-
-/* כשמתמקדים בתיבה (לוחצים/מתחילים לכתוב) */
-input[type="text"]:focus {
-  border: 1px solid #aaa;                  /* המסגרת נהיית אפורה כהה יותר */
-  box-shadow: 0 3px 6px rgba(0,0,0,0.2);   /* הצל נהיה חזק יותר */
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 2px solid #007bff;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 
 button {
   padding: 12px 24px;
   font-size: 16px;
-  background-color: #2c4650f3;
+  background-color: #2c3e50;
   color: white;
   border: none;
   border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.3s;
+  
 }
 
 button:hover {
   background-color: #3e5870;
   transform: scale(1.03);
 }
-
 
 #result {
   display:none ;
@@ -128,7 +121,9 @@ button:hover {
   margin-left: 10px;
   margin-top: 40px;
   gap:15px;
+  border-radius: 30px;
 }
+
 
 .backtohp button img {
   width: 80px;         /* קובע גודל */
@@ -145,6 +140,16 @@ button:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+
+.title{
+  color:white;
+  margin-top: -40px;   /* מוריד את הכותרת למטה */
+  text-align: center; /* מוודא שהיא במרכז */
+ font-size: 50px;
+ font-family: Verdana;
+ font-weight: bold;
 }
 
 .sidebar {
@@ -170,7 +175,3 @@ button:hover {
   color: #1e90ff;           /* כחול יפה (DodgerBlue) */
   
 }
-
-
-
-

@@ -152,3 +152,28 @@ button:hover {
   justify-content: center;
 }
 
+
+.sidebar {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: row; /* עושה אותם בטור */
+  gap: 20px;              /* רווח ביניהם */
+}
+
+.sidebar a {
+  color: white;             /* צבע טקסט */
+  font-size: 20px;
+  text-decoration: none;    /* בלי קו תחתון */
+  transition: color 0.3s;
+  font-weight: bold;
+}
+
+
+
+.sidebar a:hover {
+  color: #1e90ff;           /* כחול יפה (DodgerBlue) */
+  
+}
+
