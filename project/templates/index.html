@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
-  <title>Document</title>
+  <title>Fake news detector</title>
 </head>
 
 
 <nav class="sidebar">
   <a href="{{ url_for('about') }}">About</a>
-  <a href="{{ url_for('howto') }}">How to Use</a>
+  <a href="{{ url_for('howto') }}">How-to-Use</a>
   </ul>
 </nav>
 <body>
@@ -28,7 +28,7 @@
   
    <div class="overlay">
     <h1 >Choose an option:</h1>
-    <a href="{{ url_for('videopage') }}"><button >Transcribe video </button></a>
+    <a href="{{ url_for('videopage') }}"><button >Transcribe a video </button></a>
     <a href="{{ url_for('textpage') }}"><button >Check Reliability Text</button></a>
   </div>
 

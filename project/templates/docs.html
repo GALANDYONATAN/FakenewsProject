@@ -2,17 +2,64 @@
 <html lang="en" >
 <head>
     <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/docs.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
    
-    <a
-    href="{{ url_for('static', filename='docs/middlereport.pdf') }}"
-    download="middlereport.pdf"   <!-- שם הקובץ בזמן ההורדה -->
-  >
-    <button type="button">⬇️ Download Project Book</button>
-  </a>
-  עובד מעולה בדפדפנים מודרניים.
+   
+
+
+
+
+
+
 </head>
 <body>
 
+
+  <div class="backtohp">
+    <a href="{{ url_for('home') }}">
+      <button>
+        <img src="/static/pictures/home.jpg" alt="Home" width="80" height="80">
+      </button>
+    </a>
+  </div>
+
+  <div class="overlay">
+
+    <a
+    href="{{ url_for('static', filename='docs/middlereport.pdf') }}"
+    download="middlereport.pdf"   <!-- שם הקובץ בזמן ההורדה -->
+  
+    <button type="button"> Download Requirements review</button>
+  </a>
+  
+  
+  
+  
+  <a
+  href="{{ url_for('static', filename='docs/middlereport.pdf') }}"
+  download="middlereport.pdf" >
+  
+  <button > Download Design approval</button>
+  </a>
+  
+  
+  
+  
+  <a
+  href="{{ url_for('static', filename='docs/middlereport.pdf') }}"
+  download="middlereport.pdf"   <!-- שם הקובץ בזמן ההורדה -->
+  
+  <button >Download Book Project</button>
+  </a>
+  
+  
+
+  </div>
+
+ 
     
 
 
