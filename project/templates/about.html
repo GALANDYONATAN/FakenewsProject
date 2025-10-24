@@ -14,9 +14,16 @@
 </nav>
 
 <body>
-  <div class="bg"></div> <!-- שכבת הרקע עם טשטוש -->
+  <div class="backtohp">
+    <a href="{{ url_for('home') }}">
+      <button>
+        <img src="/static/pictures/home.jpg" alt="Home" width="80" height="80">
+      </button>
+    </a>
+  </div>
 
   <div class="content">
+    <img class="editimg" src="/static/pictures/rtsalmoi_.jpeg" alt="תיאור של התמונה" >
     <div class="titleandmidtitle">
       <h1>About Us</h1>
       <p class="midtitle">Fake News Detector is a leading platform...</p>
@@ -38,8 +45,7 @@
         We live in a generation where people don’t want to waste their
         time watching entire videos — the fastest way to consume information is through transcription.
         We are continuously working to add more features in the future to improve the model and enhance transcription speed, with the goal of providing users with the most convenient service possible. Of course, we have also implemented algorithms that help identify common words in the language. In addition, we provide a clear guide on how to use the model, whether for text or video, and we warmly invite you to try it out.
-
-We would also like to express our gratitude to Dr. Nadav Wolloch for his dedicated guidance and in-depth mentorship throughout every stage of the project.
+        We would also like to express our gratitude to Dr. Nadav Wolloch for his dedicated guidance and in-depth mentorship throughout every stage of the project.
       </p>
     </details>
   </div>
