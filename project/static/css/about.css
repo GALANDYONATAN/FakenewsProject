@@ -39,12 +39,14 @@ h1 {
   font-size: 50px;
   font-family: Verdana;
   text-shadow: 4px 4px 7px rgba(0,0,0,0.7);
+  margin: 0;
+
 }
 
 /* תת-כותרת */
 .midtitle {
   color: white; 
-  font-size: 30px;
+  font-size: 14px;
   text-shadow: 7px 7px 9px rgba(0,0,0,0.7);
 }
 
@@ -56,10 +58,65 @@ h1 {
 
 /* תיאור */
 .description {
-  max-width: 900px;
-  margin-left: 170px;    /* יושב באמצע */
+  margin-top: 70px;
+  max-width: 600px;
+  margin-left: 350px;
   color: white; 
   line-height: 1.6;      /* רווח בין שורות */
   text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
 }
+
+details {
+  max-width: 900px;
+  color: white;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+  margin: 10px 0;      /* שולט על הרווח הכללי */
+  padding: 0;    
+}
+
+summary {
+  cursor: pointer;
+  font-size: 18px;
+  color:white;
+  margin-left: 350px;
+  font-weight: bold;
+  
+ 
+  
+}
+
+summary:hover {
+  text-decoration: underline;
+  font-weight: bold;
+
+}
+
+
+
+.sidebar {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: row; /* עושה אותם בטור */
+  gap: 20px;              /* רווח ביניהם */
+}
+
+.sidebar a {
+  color: white;             /* צבע טקסט */
+  font-size: 20px;
+  text-decoration: none;    /* בלי קו תחתון */
+  transition: color 0.3s;
+  font-weight: bold;
+}
+
+
+
+.sidebar a:hover {
+  color: #1e90ff;           /* כחול יפה (DodgerBlue) */
+  
+}
+
+
+
 

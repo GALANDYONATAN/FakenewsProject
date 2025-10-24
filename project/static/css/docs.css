@@ -90,6 +90,7 @@ button {
 button:hover {
   background-color: #3e5870;
   transform: scale(1.03);
+  font-weight: bold;
 }
 
 #result {

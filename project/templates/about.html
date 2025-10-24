@@ -7,6 +7,12 @@
   <title>Document</title>
  
 </head>
+<nav class="sidebar">
+  <a href="{{ url_for('about') }}">About</a>
+  <a href="{{ url_for('howto') }}">How-to-Use</a>
+  </ul>
+</nav>
+
 <body>
   <div class="bg"></div> <!-- שכבת הרקע עם טשטוש -->
 
@@ -24,6 +30,18 @@
       We integrated advanced technologies such as Flask and Python, along with Whisper transcription libraries and NLP (Natural Language Processing) tools, 
       to build a reliable and intelligent system.
     </p>
+    <details>
+      <summary>Read More...</summary>
+      <p class="description">
+        We invite you to visit our website and try transcribing a video using TikTok, explore TikTok-related credibility parameters, or simply enter a text and quickly receive results indicating whether the content is reliable, 
+        along with relevant confidence percentages.
+        We live in a generation where people don’t want to waste their
+        time watching entire videos — the fastest way to consume information is through transcription.
+        We are continuously working to add more features in the future to improve the model and enhance transcription speed, with the goal of providing users with the most convenient service possible. Of course, we have also implemented algorithms that help identify common words in the language. In addition, we provide a clear guide on how to use the model, whether for text or video, and we warmly invite you to try it out.
+
+We would also like to express our gratitude to Dr. Nadav Wolloch for his dedicated guidance and in-depth mentorship throughout every stage of the project.
+      </p>
+    </details>
   </div>
 </body>
 
