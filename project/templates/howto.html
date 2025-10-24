@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/howto.css') }}">
+  <title>Document</title>
+ 
+</head>
+<nav class="sidebar">
+  <a href="{{ url_for('about') }}">About</a>
+  <a href="{{ url_for('howto') }}">Behind-the-Scenes</a>
+  </ul>
+</nav>
+
+<body>
+  <div class="backtohp">
+    <a href="{{ url_for('home') }}">
+      <button>
+        <img src="/static/pictures/home.jpg" alt="Home" width="80" height="80">
+      </button>
+    </a>
+  </div>
+
+   <h1>How the System Works?</h1>
+  <div class="boxes">
+    <div class="overlay">
+      On the Home button, click Visit our Website, and the site will open with two options:<br>
+      1.Transcribe a TikTok video <br>
+      2.Transcribe text in order to check its credibility.<br>
+      To transcribe text, simply click Download to access the TikTok parameters used for credibility analysis.
+    </div>
+    <div class="overlay">Step 2: Processing</div>
+    <div class="overlay">Step 3: Result</div>
+    <div class="overlay">Step 2: Processing</div>
+    <div class="overlay">Step 2: Processing</div>
+    <div class="overlay">Step 2: Processing</div>
+   
+  </div>
+
+  
+</body>
+
+
+</html>
+  
