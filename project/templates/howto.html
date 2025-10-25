@@ -25,43 +25,44 @@
 
    <h1>How the System Works?</h1>
   <div class="boxes">
-    <p>Step 1: Enter Your Data:</p>
+    <p class="smalltitle">Step 1: Enter Your Data:</p>
     <div class="overlay">
       On the Home button, click Visit our Website, and the site will open with two options:<br>
       1.Transcribe a TikTok video <br>
       2.Transcribe text in order to check its credibility.<br>
-      Refer only to the attribute in the text row that you need to enter in order to check its credibility.
-      You can contact us to get the dataset for free.
+      Refer only to the attribute in the text row that you need to enter in order to check its credibility.<br>
+      You can <a href="{{ url_for('contact') }}">Contact</a> us to get the dataset for free.
 
-      Enter the text you wish to select from the training set.
+      Enter the text you wish to select from the training set.<br>
       For video transcription, you will need to provide a URL — please make sure it is a valid address.
-      Example:
+      <p class="examplebold">Example:</p>
       https://vt.tiktok.com/ZSrG3AdKh/
 
     </div>
-    Step 2: Processing:
+   <p class="smalltitle">Step 2: Processing:</p>
     <div class="overlay">
   
 
 This code is a Flask application (a small Python web server) that serves HTML pages and also handles requests for text credibility checking and video transcription.<br>
 
- Libraries Used:<br>
+ <p class="examplebold" >Libraries Used:</p>
 
-Flask-for creating the server and managing pages/requests.<br>
+<p class="examplebold">Flask-</p>for creating the server and managing pages/requests.
 
-yt_dlp-used to download videos from YouTube or TikTok (a modern fork of youtube-dl).<br>
+<p class="examplebold">yt_dlp-</p>used to download videos from YouTube or TikTok (a modern fork of youtube-dl).
 
-ffmpeg-converts the downloaded video into a WAV audio file so it can be processed.<br>
+<p class="examplebold">ffmpeg-</p>converts the downloaded video into a WAV audio file so it can be processed.
 
-whisper-OpenAI’s model for transcribing audio files into text.<br>
+<p class="examplebold">whisper-</p>OpenAI’s model for transcribing audio files into text.
 
-ssl-adjusts SSL settings to allow connections even without a valid certificate.<br>
+<p class="examplebold">ssl-</p>adjusts SSL settings to allow connections even without a valid certificate.
 
-os-manages files (delete, check existence, join paths).<br>
+<p class="examplebold">os-</p>manages files (delete, check existence, join paths).
 
-pandas (pd)-loads a CSV file containing text samples and credibility data (used for fake news detection).<br>
+<p class="examplebold">pandas (pd)-</p>loads a CSV file containing text samples and credibility data (used for fake news detection).
+<br>In addition, we used these libraries for machine learning, and a detailed code implementation is provided in the Jupyter Notebook. The notebook explains how we identified the most suitable classifier and evaluated its performance. Based on this process, we created a dataset containing all the results.
 
-🔹 Text Check Process (/send)<br>
+<p class="examplebold">Text Check Process (/send):</p> <br>
 
 The user sends a text snippet (via JSON).
 
@@ -74,13 +75,13 @@ If no match is found,the system returns an error.
  Here, there is no transcription — only a lookup and comparison against existing dataset values.<br>
 
 
-🔹 Video Transcription Process (/transcribe)<br>
+<p class="examplebold">Video Transcription Process (/transcribe):</p><br>
 
 The system receives a video link (video_url) from the user.
 
 If old files video.mp4 or audio.wav exist,they are deleted to ensure a clean start.<br>
 
-Using yt_dlp-the video is downloaded and saved as video.mp4.<br>
+Using yt_dlp-the video is downloaded and saved as video.mp4.
 
 Using ffmpeg-the audio track is extracted from the video and saved as audio.wav in the proper format (mono, 16kHz, PCM).<br>
 
@@ -106,10 +107,13 @@ whisper (speech-to-text transcription).
 
 
     </div>
-    Step 3: Result
+   <p class="smalltitle">Step 3: Results:</p> 
     <div class="overlay">
-      In the video transcription image, you can see that the text has been fully transcribed — everything spoken in the video is displayed.
+      <img  class="img1" src="/static/pictures/video1.jpg" alt="תיאור של התמונה" >
+      <img  class="img1" src="/static/pictures/video2.jpg" alt="תיאור של התמונה" ><br>
+      In the video transcription image, you can see that the text has been fully transcribed — everything spoken in the video is displayed.<br>
 
+      <img  class="img2" src="/static/pictures/texttool.jpg" alt="תיאור של התמונה" ><br>
 In the text transcription image, you can view the final results: whether the text is reliable or unreliable (in other words, whether it represents a factual claim or just an opinion).
 The output also shows the percentage of credibility and the percentage of falsehood.
 This way, you can clearly see whether a given text, according to TikTok parameters, is considered credible or not.
