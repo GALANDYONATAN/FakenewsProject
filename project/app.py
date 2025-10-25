@@ -55,9 +55,7 @@ def about():
 def howto():
     return render_template("howto.html")
 
-@app.route("/contact")
-def contact():
-    return render_template("contact.html")
+
 
 
 
