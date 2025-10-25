@@ -9,7 +9,8 @@
 </head>
 <nav class="sidebar">
   <a href="{{ url_for('about') }}">About</a>
-  <a href="{{ url_for('howto') }}">Behind-the-Scenes</a>
+  <a href="{{ url_for('howto') }}">How-To-Use</a>
+  <a href="{{ url_for('contact') }}">Contact</a>
   </ul>
 </nav>
 
@@ -29,6 +30,21 @@
       1.Transcribe a TikTok video <br>
       2.Transcribe text in order to check its credibility.<br>
       To transcribe text, simply click Download to access the TikTok parameters used for credibility analysis.
+      Refer only to the attribute in the text row that you need to enter in order to check its credibility.
+      You can download the dataset from here.
+
+      <a
+      href="{{ url_for('static', filename='docs/tik_tok_predictions_full_backup.csv') }}"
+      download="middlereport.pdf"   <!-- שם הקובץ בזמן ההורדה -->
+    
+      <button type="button"> Download Tik-Tok Parmeters</button>
+    </a>
+
+    Enter the text you wish to select from the training set.
+    For video transcription, you will need to provide a URL — please make sure it is a valid address.
+    Example:
+    https://vt.tiktok.com/ZSrG3AdKh/
+
     </div>
     <div class="overlay">Step 2: Processing</div>
     <div class="overlay">Step 3: Result</div>
