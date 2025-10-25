@@ -25,6 +25,7 @@
 
    <h1>How the System Works?</h1>
   <div class="boxes">
+    <p>Step 1: Enter Your Data:</p>
     <div class="overlay">
       On the Home button, click Visit our Website, and the site will open with two options:<br>
       1.Transcribe a TikTok video <br>
@@ -38,26 +39,27 @@
       https://vt.tiktok.com/ZSrG3AdKh/
 
     </div>
-    <div class="overlay">Step 2: Processing
-      📌 General Structure
+    Step 2: Processing:
+    <div class="overlay">
+  
 
 This code is a Flask application (a small Python web server) that serves HTML pages and also handles requests for text credibility checking and video transcription.<br>
 
  Libraries Used:<br>
 
-Flask → for creating the server and managing pages/requests.<br>
+Flask-for creating the server and managing pages/requests.<br>
 
-yt_dlp → used to download videos from YouTube or TikTok (a modern fork of youtube-dl).<br>
+yt_dlp-used to download videos from YouTube or TikTok (a modern fork of youtube-dl).<br>
 
-ffmpeg → converts the downloaded video into a WAV audio file so it can be processed.<br>
+ffmpeg-converts the downloaded video into a WAV audio file so it can be processed.<br>
 
-whisper → OpenAI’s model for transcribing audio files into text.<br>
+whisper-OpenAI’s model for transcribing audio files into text.<br>
 
-ssl → adjusts SSL settings to allow connections even without a valid certificate.<br>
+ssl-adjusts SSL settings to allow connections even without a valid certificate.<br>
 
-os → manages files (delete, check existence, join paths).<br>
+os-manages files (delete, check existence, join paths).<br>
 
-pandas (pd) → loads a CSV file containing text samples and credibility data (used for fake news detection).<br>
+pandas (pd)-loads a CSV file containing text samples and credibility data (used for fake news detection).<br>
 
 🔹 Text Check Process (/send)<br>
 
@@ -65,26 +67,26 @@ The user sends a text snippet (via JSON).
 
 The code searches for this text inside the CSV file (tik_tok_predictions_full_backup.csv) in the "text_snippet" column.
 
-If a match is found → the system returns data: whether it is classified as fake news and the corresponding Reliability/Unreliability scores.
+If a match is found,the system returns data: whether it is classified as fake news and the corresponding Reliability/Unreliability scores.
 
-If no match is found → the system returns an error.
+If no match is found,the system returns an error.
 
-📌 Here, there is no transcription — only a lookup and comparison against existing dataset values.<br>
+ Here, there is no transcription — only a lookup and comparison against existing dataset values.<br>
 
 
 🔹 Video Transcription Process (/transcribe)<br>
 
 The system receives a video link (video_url) from the user.
 
-If old files video.mp4 or audio.wav exist → they are deleted to ensure a clean start.
+If old files video.mp4 or audio.wav exist,they are deleted to ensure a clean start.<br>
 
-Using yt_dlp → the video is downloaded and saved as video.mp4.
+Using yt_dlp-the video is downloaded and saved as video.mp4.<br>
 
-Using ffmpeg → the audio track is extracted from the video and saved as audio.wav in the proper format (mono, 16kHz, PCM).
+Using ffmpeg-the audio track is extracted from the video and saved as audio.wav in the proper format (mono, 16kHz, PCM).<br>
 
-The audio file is sent to the Whisper model for transcription:
+The audio file is sent to the Whisper model for transcription:<br>
 
-result = whisper_model.transcribe("audio.wav", language="en")
+result = whisper_model.transcribe("audio.wav", language="en").<br>
 
 
 The model processes the audio and returns the corresponding text.
@@ -94,7 +96,7 @@ The system responds with the transcription as JSON:
 { "transcription": "..." }
 
 
-📌 This step combines three libraries working together:
+,This step combines three libraries working together:
 
 yt_dlp (download),
 
@@ -102,22 +104,17 @@ ffmpeg (audio extraction),
 
 whisper (speech-to-text transcription).
 
-🔹 Quick Summary
 
-Text Check: compares the user’s input with a CSV dataset (via pandas).
-
-Video Transcription:
-
-Download video (yt_dlp)
-
-Extract audio (ffmpeg)
-
-Transcribe audio to text (whisper)
     </div>
-    <div class="overlay">Step 3: Result</div>
-    <div class="overlay">Step 2: Processing</div>
-    <div class="overlay">Step 2: Processing</div>
-    <div class="overlay">Step 2: Processing</div>
+    Step 3: Result
+    <div class="overlay">
+      In the video transcription image, you can see that the text has been fully transcribed — everything spoken in the video is displayed.
+
+In the text transcription image, you can view the final results: whether the text is reliable or unreliable (in other words, whether it represents a factual claim or just an opinion).
+The output also shows the percentage of credibility and the percentage of falsehood.
+This way, you can clearly see whether a given text, according to TikTok parameters, is considered credible or not.
+    </div>
+    
    
   </div>
 
