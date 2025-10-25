@@ -46,7 +46,81 @@
     https://vt.tiktok.com/ZSrG3AdKh/
 
     </div>
-    <div class="overlay">Step 2: Processing</div>
+    <div class="overlay">Step 2: Processing
+      📌 General Structure
+
+This code is a Flask application (a small Python web server) that serves HTML pages and also handles requests for text credibility checking and video transcription.<br>
+
+ Libraries Used:<br>
+
+Flask → for creating the server and managing pages/requests.
+
+yt_dlp → used to download videos from YouTube or TikTok (a modern fork of youtube-dl).
+
+ffmpeg → converts the downloaded video into a WAV audio file so it can be processed.
+
+whisper → OpenAI’s model for transcribing audio files into text.
+
+ssl → adjusts SSL settings to allow connections even without a valid certificate.
+
+os → manages files (delete, check existence, join paths).
+
+pandas (pd) → loads a CSV file containing text samples and credibility data (used for fake news detection).
+
+🔹 Text Check Process (/send)
+
+The user sends a text snippet (via JSON).
+
+The code searches for this text inside the CSV file (tik_tok_predictions_full_backup.csv) in the "text_snippet" column.
+
+If a match is found → the system returns data: whether it is classified as fake news and the corresponding Reliability/Unreliability scores.
+
+If no match is found → the system returns an error.
+
+📌 Here, there is no transcription — only a lookup and comparison against existing dataset values.
+
+🔹 Video Transcription Process (/transcribe)
+
+The system receives a video link (video_url) from the user.
+
+If old files video.mp4 or audio.wav exist → they are deleted to ensure a clean start.
+
+Using yt_dlp → the video is downloaded and saved as video.mp4.
+
+Using ffmpeg → the audio track is extracted from the video and saved as audio.wav in the proper format (mono, 16kHz, PCM).
+
+The audio file is sent to the Whisper model for transcription:
+
+result = whisper_model.transcribe("audio.wav", language="en")
+
+
+The model processes the audio and returns the corresponding text.
+
+The system responds with the transcription as JSON:
+
+{ "transcription": "..." }
+
+
+📌 This step combines three libraries working together:
+
+yt_dlp (download),
+
+ffmpeg (audio extraction),
+
+whisper (speech-to-text transcription).
+
+🔹 Quick Summary
+
+Text Check: compares the user’s input with a CSV dataset (via pandas).
+
+Video Transcription:
+
+Download video (yt_dlp)
+
+Extract audio (ffmpeg)
+
+Transcribe audio to text (whisper)
+    </div>
     <div class="overlay">Step 3: Result</div>
     <div class="overlay">Step 2: Processing</div>
     <div class="overlay">Step 2: Processing</div>
