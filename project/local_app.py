@@ -58,7 +58,7 @@ def contact():
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))   # התיקייה של app.py (כלומר project/)
-CSV_PATH = os.path.join(BASE_DIR, "static", "docs", "tik_tok_predictions_full_backup.csv")
+CSV_PATH = os.path.join(BASE_DIR,"tik_tok_predictions_full_backup.csv")
 
 df = pd.read_csv(CSV_PATH)
 

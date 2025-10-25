@@ -29,21 +29,13 @@
       On the Home button, click Visit our Website, and the site will open with two options:<br>
       1.Transcribe a TikTok video <br>
       2.Transcribe text in order to check its credibility.<br>
-      To transcribe text, simply click Download to access the TikTok parameters used for credibility analysis.
       Refer only to the attribute in the text row that you need to enter in order to check its credibility.
-      You can download the dataset from here.
+      You can contact us to get the dataset for free.
 
-      <a
-      href="{{ url_for('static',filename='docs/tik_tok_predictions_full_backup.csv') }}"
-      download="tik_tok_predictions_full_backup.csv"   <!-- שם הקובץ בזמן ההורדה -->
-    
-      <button type="button"> Download Tik-Tok Parmeters</button>
-    </a>
-
-    Enter the text you wish to select from the training set.
-    For video transcription, you will need to provide a URL — please make sure it is a valid address.
-    Example:
-    https://vt.tiktok.com/ZSrG3AdKh/
+      Enter the text you wish to select from the training set.
+      For video transcription, you will need to provide a URL — please make sure it is a valid address.
+      Example:
+      https://vt.tiktok.com/ZSrG3AdKh/
 
     </div>
     <div class="overlay">Step 2: Processing
@@ -77,9 +69,10 @@ If a match is found → the system returns data: whether it is classified as fak
 
 If no match is found → the system returns an error.
 
-📌 Here, there is no transcription — only a lookup and comparison against existing dataset values.
+📌 Here, there is no transcription — only a lookup and comparison against existing dataset values.<br>
 
-🔹 Video Transcription Process (/transcribe)
+
+🔹 Video Transcription Process (/transcribe)<br>
 
 The system receives a video link (video_url) from the user.
 
