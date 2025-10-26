@@ -132,8 +132,8 @@ button:hover {
 }
 
 .backtohp button img {
-  width: 80px;         /* קובע גודל */
-  height: 80px;        /* עדיף לשים אותו ערך כמו width */
+  width: 65px;         /* קובע גודל */
+  height: 65px;        /* עדיף לשים אותו ערך כמו width */
   border-radius: 50%;  /* הופך את התמונה לעיגול */
   object-fit: cover;   /* ממלא את הצורה בלי לעוות */
 }

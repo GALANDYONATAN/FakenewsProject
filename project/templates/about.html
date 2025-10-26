@@ -22,6 +22,11 @@
         <img src="/static/pictures/home.jpg" alt="Home" width="80" height="80">
       </button>
     </a>
+        <a href="{{ url_for('index') }}">
+      <button>
+        <img src="/static/pictures/left.jpg" alt="Home" width="80" height="80">
+      </button>
+    </a>
   </div>
 
   <div class="content">
@@ -39,8 +44,9 @@
       We integrated advanced technologies such as Flask and Python, along with Whisper transcription libraries and NLP (Natural Language Processing) tools, 
       to build a reliable and intelligent system.
     </p>
-    <details>
-      <summary>Read More...</summary>
+    <details id="read-more-box">
+>
+      <summary id="read-more-summary">Read More...</summary>
       <p class="description">
         We invite you to visit our website and try transcribing a video using TikTok, explore TikTok-related credibility parameters, or simply enter a text and quickly receive results indicating whether the content is reliable, 
         along with relevant confidence percentages.
@@ -51,6 +57,20 @@
       </p>
     </details>
   </div>
+  
+  <script>
+  const details = document.getElementById('read-more-box');
+  const summary = document.getElementById('read-more-summary');
+
+  // קובע את הטקסט ההתחלתי לפי מצב האלמנט
+  summary.textContent = details.open ? 'Read Less...' : 'Read More...';
+
+  // מאזין לפתיחה/סגירה
+  details.addEventListener('toggle', () => {
+    summary.textContent = details.open ? 'Read Less...' : 'Read More...';
+  });
+</script>
+
 </body>
 
 

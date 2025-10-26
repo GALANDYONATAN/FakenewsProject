@@ -19,7 +19,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(8px);  /* הטשטוש עצמו */
+  backdrop-filter: blur(3px);  /* הטשטוש עצמו */
   z-index: -1;                 /* מאחורי כל התוכן */
 }
 .backtohp {
@@ -34,8 +34,8 @@ body::before {
 
 
 .backtohp button img {
-  width: 80px;         /* קובע גודל */
-  height: 80px;        /* עדיף לשים אותו ערך כמו width */
+  width: 65px;         /* קובע גודל */
+  height: 65px;        /* עדיף לשים אותו ערך כמו width */
   border-radius: 50%;  /* הופך את התמונה לעיגול */
   object-fit: cover;   /* ממלא את הצורה בלי לעוות */
 }
@@ -92,11 +92,9 @@ body::before {
   color: black;
   font-size: 19px;
   font-family: Verdana;
- 
- 
-
- 
+  
 }
+  
 
 h1 {
   color: white; 
@@ -138,6 +136,19 @@ h1 {
   font-weight: bold;
 
 }
+
+
+.backtohp a,
+.backtohp button,
+.backtohp button img {
+  cursor: pointer;
+}
+
+.backtohp {
+  position: relative;
+  z-index: 100;
+}
+
 
 
 
