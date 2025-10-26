@@ -180,5 +180,54 @@ summary:hover {
 
 
 
+/* ===== תיקוני תאימות ל-iPhone / iPad (iOS Safari) ===== */
+@supports (-webkit-touch-callout: none) {
+  /* iOS לא מסתדר עם background-attachment: fixed */
+  body {
+    background-attachment: scroll !important;
+  }
+
+  /* ב-iOS backdrop-filter דורש גם רקע שקוף חלקית, וגם prefix */
+  body::before {
+    -webkit-backdrop-filter: blur(5px) !important;
+    backdrop-filter: blur(5px) !important;
+    background: rgba(255, 255, 255, 0.12) !important; /* חובה ב-iOS כדי לראות את הטשטוש */
+    z-index: 0 !important;               /* שיהיה מעל רקע ה-body אבל מתחת לתוכן */
+    pointer-events: none;                 /* שלא יחסום לחיצות */
+  }
+
+  /* ודא שהתוכן תמיד מעל שכבת הטשטוש */
+  .content,
+  .sidebar,
+  .backtohp {
+    position: relative;
+    z-index: 1;
+    overflow: visible;                    /* אל תחתוך שכבות במובייל */
+  }
+
+  /* תמונות לא ייעלמו תחת שכבות/האצה גרפית */
+  .editimg,
+  .content img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    will-change: transform, filter;
+    z-index: 1;
+  }
+}
+
+/* אופציונלי: במכשירים צרים במיוחד, שמור מרווח מהקצוות
+   (לא משנה פריסה קיימת—רק מונע חיתוך שכבות) */
+@media (max-width: 600px) {
+  .content { padding: 0 12px; }
+}
+
+
+
+
 
 
