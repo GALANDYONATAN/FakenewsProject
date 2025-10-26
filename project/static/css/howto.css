@@ -71,6 +71,7 @@ body::before {
 
 .sidebar a:hover {
   color: #1e90ff;           /* כחול יפה (DodgerBlue) */
+  text-decoration: underline;
   
 }
 
