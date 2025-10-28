@@ -34,14 +34,9 @@
   <div class="boxes">
     <p class="smalltitle">Step 1: Enter Your Data:</p>
     <div class="overlay">
-      On the Home button, click Visit our Website, and the site will open with two options:<br>
-      1.Transcribe a TikTok video <br>
-      2.Transcribe text in order to check its credibility.<br>
-      Refer only to the attribute in the text row that you need to enter in order to check its credibility.<br>
-      You can <a href="{{ url_for('contact') }}">Contact</a> us to get the dataset for free.
-
-      Enter the text you wish to select from the training set.<br>
-      For video transcription, you will need to provide a URL — please make sure it is a valid address.
+      On the Home button, click Visit our Website, and the site will open with one option:<br>
+      Check Video Reliability <br>
+      To Evaluate the reliability of a TikTok video, you will need to provide a URL — please make sure it is a valid address.
       <p class="examplebold">Example:</p>
       https://vt.tiktok.com/ZSrG3AdKh/
 
@@ -69,61 +64,56 @@ This code is a Flask application (a small Python web server) that serves HTML pa
 <p class="examplebold">pandas (pd)-</p>loads a CSV file containing text samples and credibility data (used for fake news detection).
 <br>In addition, we used these libraries for machine learning, and a detailed code implementation is provided in the Jupyter Notebook. The notebook explains how we identified the most suitable classifier and evaluated its performance. Based on this process, we created a dataset containing all the results.
 
-<p class="examplebold">Text Check Process (/send):</p> <br>
 
-The user sends a text snippet (via JSON).
+<p class="examplebold">Video Transcription & Verification Flow (/transcribe):</p><br>
 
-The code searches for this text inside the CSV file (tik_tok_predictions_full_backup.csv) in the "text_snippet" column.
+ The client sends a JSON with a TikTok video link: <code>{"url": "&lt;video_url&gt;"}</code>.<br>
 
-If a match is found,the system returns data: whether it is classified as fake news and the corresponding Reliability/Unreliability scores.
+ The server removes any leftover files (<code>video.mp4</code>, <code>audio.wav</code>) to start clean.<br>
 
-If no match is found,the system returns an error.
+ <strong>Download:</strong> Using <code>yt_dlp</code>, the video is downloaded and saved as <code>video.mp4</code>.<br>
 
- Here, there is no transcription — only a lookup and comparison against existing dataset values.<br>
+ <strong>Audio extraction:</strong> Using <code>ffmpeg</code>, the audio track is extracted to <code>audio.wav</code> (mono, 16kHz, PCM).<br>
 
+ <strong>Transcription:</strong> A Whisper <code>base</code> model is loaded and called:<br>
+<code>result = whisper.load_model("base").transcribe("audio.wav", language="en")</code><br>
+The transcribed text is taken from <code>result["text"]</code> and trimmed.<br>
 
-<p class="examplebold">Video Transcription Process (/transcribe):</p><br>
+ <strong>Dataset lookup:</strong> The full transcript is looked up in the CSV-backed DataFrame (<code>df</code>) by exact match on the <code>text</code> column:<br>
+<code>df["text"].str.strip() == transcript</code>.<br>
 
-The system receives a video link (video_url) from the user.
+ <strong>Response:</strong><br>
+&nbsp;&nbsp;• If the transcript is empty → <code>{"error": "No text received"}</code> (HTTP 400).<br>
+&nbsp;&nbsp;• If no matching row is found in the dataset → <code>{"error": "Text not found in dataset"}</code> (HTTP 404).<br>
+&nbsp;&nbsp;• If a match is found → the endpoint returns the saved verification fields:<br>
+<code>{
+ "Fake news check": "...",
+ "Reliability": &lt;float&gt;,
+ "Unreliability": &lt;float&gt;
+}</code><br>
 
-If old files video.mp4 or audio.wav exist,they are deleted to ensure a clean start.<br>
+<br>
+<p>This flow combines three core libraries working together:</p>
+<ul>
+  <li><strong>yt_dlp</strong> – video download</li>
+  <li><strong>ffmpeg</strong> – audio extraction (WAV, mono, 16 kHz, PCM)</li>
+  <li><strong>whisper</strong> – speech-to-text transcription</li>
+</ul>
+<p>Additionally, <strong>pandas</strong> is used to search the dataset for an exact transcript match and return precomputed credibility results.</p>
 
-Using yt_dlp-the video is downloaded and saved as video.mp4.
-
-Using ffmpeg-the audio track is extracted from the video and saved as audio.wav in the proper format (mono, 16kHz, PCM).<br>
-
-The audio file is sent to the Whisper model for transcription:<br>
-
-result = whisper_model.transcribe("audio.wav", language="en").<br>
-
-
-The model processes the audio and returns the corresponding text.
-
-The system responds with the transcription as JSON:
-
-{ "transcription": "..." }
-
-
-,This step combines three libraries working together:
-
-yt_dlp (download),
-
-ffmpeg (audio extraction),
-
-whisper (speech-to-text transcription).
 
 
     </div>
    <p class="smalltitle">Step 3: Results:</p> 
     <div class="overlay">
-      <img  class="img1" src="/static/pictures/video1.jpg" alt="תיאור של התמונה" >
-      <img  class="img1" src="/static/pictures/video2.jpg" alt="תיאור של התמונה" ><br>
-      In the video transcription image, you can see that the text has been fully transcribed — everything spoken in the video is displayed.<br>
+      <img  class="img1" src="/static/pictures/tiktok1.jpg" alt="תיאור של התמונה" ><br>
+     
+      The user enters a TikTok video link, clicks Transcribe, and the system processes the video to check its credibility. A loading message indicates progress until results are displayed."
 
-      <img  class="img2" src="/static/pictures/texttool.jpg" alt="תיאור של התמונה" ><br>
-In the text transcription image, you can view the final results: whether the text is reliable or unreliable (in other words, whether it represents a factual claim or just an opinion).
+      <img  class="img2" src="/static/pictures/tiktok2.jpg" alt="תיאור של התמונה" ><br>
+In the text transcription image, you can view the final results: whether the video is reliable or unreliable (in other words, whether it represents a factual claim or just an opinion).
 The output also shows the percentage of credibility and the percentage of falsehood.
-This way, you can clearly see whether a given text, according to TikTok parameters, is considered credible or not.
+This way, you can clearly see whether a given video, according to TikTok parameters, is considered credible or not.
     </div>
     
    

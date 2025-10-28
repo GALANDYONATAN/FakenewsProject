@@ -24,11 +24,6 @@ def home():
 
 
 
-@app.route("/textpage")
-def textpage():
-    return render_template("textpage.html")
-
-
 @app.route("/videopage")
 def videopage():
     return render_template("videopage.html")
@@ -61,32 +56,6 @@ def contact():
     return render_template("contact.html")
 
 
-
-
-
-
-
-
-
-
-@app.route('/send', methods=['POST'])
-def send():
-    data = request.get_json(force=True)
-    text = (data.get("Text") or "").strip()
-    if not text:
-        return jsonify({"error": "No text received"}), 400
-    
-    row = df[df["text_snippet"].str.strip() == text]
-    if row.empty:
-        return jsonify({"error": "Text not found in dataset"}), 404
-    
-    row = row.iloc[0]
-    return jsonify({
-        "Fake news check": str(row["Fake news check"]),
-        "Reliability": float(row["Reliability"]),
-        "Unreliability": float(row["Unreliability"])
-    })
-
 @app.route('/transcribe', methods=['POST'])
 def transcribe():
     try:
@@ -97,20 +66,37 @@ def transcribe():
             if os.path.exists(f):
                 os.remove(f)
 
-        # Download video
+        # הורדת וידאו
         ydl_opts = {'outtmpl': 'video.mp4', 'format': 'mp4'}
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download([video_url])
 
-        # Extract audio
+        # חילוץ אודיו
         ffmpeg.input('video.mp4').output(
             'audio.wav', format='wav',
             acodec='pcm_s16le', ac=1, ar='16000'
         ).overwrite_output().run()
 
-        # Transcribe
-        result = whisper_model.transcribe("audio.wav", language="en")
-        return jsonify({"transcription": result["text"]})
+        # תמלול
+        model = whisper.load_model("base")
+        result = model.transcribe("audio.wav", language="en")
+        textResult = result["text"].strip()
+
+        if not textResult:
+            return jsonify({"error": "No text received"}), 400
+
+        # חיפוש טקסט במסד
+        row = df[df["text"].str.strip() == textResult]
+        if row.empty:
+            return jsonify({"error": "Text not found in dataset"}), 404
+
+        # לוקחים את הערכים מהשורה הראשונה שנמצאה
+        row = row.iloc[0]
+        return jsonify({
+            "Fake news check": str(row["Fake news check"]),
+            "Reliability": float(row["Reliability"]),
+            "Unreliability": float(row["Unreliability"])
+        })
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500

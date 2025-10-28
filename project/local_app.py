@@ -17,10 +17,6 @@ def home():
     return render_template("home.html")
 
 
-@app.route("/textpage")
-def textpage():
-    return render_template("textpage.html")
-
 
 @app.route("/videopage")
 def videopage():
@@ -59,29 +55,7 @@ def contact():
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))   # התיקייה של app.py (כלומר project/)
 CSV_PATH = os.path.join(BASE_DIR, "tiktok_predictions_full.csv")
-
 df = pd.read_csv(CSV_PATH)
-
-@app.route('/send', methods=['POST'])
-def send():
-   
-    data=request.get_json(force=True)
-    text = (data.get("Text") or "").strip()
-    if not text:
-         return jsonify({"error": "No text received"}), 400
-    row = df[df["text_snippet"].str.strip() == text]
-    if row.empty:
-        return jsonify({"error": "Text not found in dataset"}), 404
-        # לוקחים את הערכים מהשורה הראשונה שנמצאה
-    row = row.iloc[0]
-    return jsonify({
-        "Fake news check": str(row["Fake news check"]),
-        "Reliability": float(row["Reliability"]),
-        "Unreliability": float(row["Unreliability"])
-    })
-#if __name__ == "__main__":
-    #app.run(debug=True)
-
 
 @app.route('/transcribe', methods=['POST'])
 def transcribe():
