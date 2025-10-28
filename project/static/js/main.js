@@ -12,7 +12,9 @@ function transcribe() {
   })
   .then(res => res.json())
   .then(data => {
-        document.getElementById('result').innerText = data.transcription || "No transcription received.";
+        document.getElementById('result').innerText = `Fake news check: ${data["Fake news check"]}\n` +
+        `Reliability: ${data["Reliability"]}%\n` +
+        `Unreliability: ${data["Unreliability"]}%`;
 })
   .catch(err => {
         document.getElementById('result').innerText = "❌ Error during process: " + err;

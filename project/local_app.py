@@ -58,7 +58,7 @@ def contact():
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))   # התיקייה של app.py (כלומר project/)
-CSV_PATH = os.path.join(BASE_DIR, "tik_tok_predictions_full_backup.csv")
+CSV_PATH = os.path.join(BASE_DIR, "tiktok_predictions_full.csv")
 
 df = pd.read_csv(CSV_PATH)
 
@@ -81,7 +81,6 @@ def send():
     })
 #if __name__ == "__main__":
     #app.run(debug=True)
-
 
 
 @app.route('/transcribe', methods=['POST'])
@@ -108,10 +107,27 @@ def transcribe():
         # תמלול
         model = whisper.load_model("base")
         result = model.transcribe("audio.wav", language="en")
-        return jsonify({"transcription": result["text"]})
+        textResult = result["text"].strip()
+
+        if not textResult:
+            return jsonify({"error": "No text received"}), 400
+
+        # חיפוש טקסט במסד
+        row = df[df["text"].str.strip() == textResult]
+        if row.empty:
+            return jsonify({"error": "Text not found in dataset"}), 404
+
+        # לוקחים את הערכים מהשורה הראשונה שנמצאה
+        row = row.iloc[0]
+        return jsonify({
+            "Fake news check": str(row["Fake news check"]),
+            "Reliability": float(row["Reliability"]),
+            "Unreliability": float(row["Unreliability"])
+        })
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 # תוספת לפתיחת הדפדפן אוטומטית
 def open_browser():
