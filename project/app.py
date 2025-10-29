@@ -18,26 +18,6 @@ os.makedirs(MODEL_DIR, exist_ok=True)
 MODEL_PATH = os.path.join(MODEL_DIR, "base.pt")
 MODEL_URL = os.environ.get("MODEL_URL")
 
-def ensure_model():
-    if os.path.exists(MODEL_PATH):
-        print("✅ Model already exists, skipping download.")
-        return
-    
-    if not MODEL_URL:
-        raise RuntimeError("❌ MODEL_URL not set in environment variables")
-    
-    print(f"⬇️ Downloading model from {MODEL_URL} ...")
-    urllib.request.urlretrieve(MODEL_URL, MODEL_PATH)
-    print("✅ Model downloaded successfully.")
-
-# קרא לפונקציה הזו לפני שאתה טוען את המודל
-ensure_model()
-
-# כאן כבר אפשר לטעון עם PyTorch
-# import torch
-# model = torch.load(MODEL_PATH, map_location="cpu")
-
-
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "model_pipeline.pkl")   # <<< ודא שקובץ זה קיים בצדך
 pipe = joblib.load(MODEL_PATH)
