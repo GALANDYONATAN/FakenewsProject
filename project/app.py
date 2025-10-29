@@ -106,7 +106,6 @@ def transcribe():
 
         # תמלול
         model = whisper.load_model("base")
-
         result = model.transcribe("audio.wav", language="en")
         transcription = (result.get("text") or "").strip()
         if not transcription:
@@ -145,15 +144,12 @@ def transcribe():
             }).mappings().first()
 
         return jsonify({
-            "source": saved["source"],
-            "id": int(saved["id"]),
-            "video_url": saved["video_url"],
+           
             "transcription": saved["transcription"],
             "Fake news check": "True" if saved["fake_news_check"] else "False",
             "Reliability": float(saved["reliability"]),
-            "Unreliability": float(saved["unreliability"]),
-            "created_at": str(saved["created_at"]),
-            "updated_at": str(saved["updated_at"])
+            "Unreliability": float(saved["unreliability"])
+            
         })
 
     except Exception as e:
