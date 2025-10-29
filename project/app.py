@@ -62,6 +62,10 @@ def transcribe():
     try:
         data = request.get_json()
         video_url = data.get("url")
+        feature = data.get("feature")
+
+
+
 
         for f in ['video.mp4', 'audio.wav']:
             if os.path.exists(f):
@@ -82,6 +86,11 @@ def transcribe():
         model = whisper.load_model("base")
         result = model.transcribe("audio.wav", language="en")
         textResult = result["text"].strip()
+
+
+        
+
+
 
         if not textResult:
             return jsonify({"error": "No text received"}), 400

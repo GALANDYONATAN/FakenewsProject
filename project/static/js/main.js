@@ -1,6 +1,7 @@
 function transcribe() {
   const url = document.getElementById('videoUrl').value;
   const resultDiv = document.getElementById('result'); 
+  const feature = document.getElementById('featureSelect').value; 
   resultDiv.style.display = 'block';
   resultDiv.innerText = "⏳ Please wait, this might take a few moments...";
   fetch('/transcribe', {
@@ -8,7 +9,7 @@ function transcribe() {
       headers: {
           'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ url: url })
+      body: JSON.stringify({ url: url, feature: feature })
   })
   .then(res => res.json())
   .then(data => {
