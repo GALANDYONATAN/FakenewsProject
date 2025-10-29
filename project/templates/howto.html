@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/howto.css') }}">
+  <link  rel="icon" type="image/png" href="/static/pictures/tiktokpic.jpeg">
+  <title>How It Works?</title>
+ 
+ 
+</head>
+<nav class="sidebar">
+  <a href="{{ url_for('about') }}">About</a>
+  <a href="{{ url_for('howto') }}">How-To-Use</a>
+  <a href="{{ url_for('contact') }}">Contact</a>
+  </ul>
+</nav>
+
+<body>
+  <div class="backtohp">
+    <a href="{{ url_for('home') }}">
+      <button>
+        <img src="/static/pictures/home.jpg" alt="Home" width="80" height="80">
+      </button>
+    </a>
+    <a href="{{ url_for('index') }}">
+      <button>
+        <img src="/static/pictures/left.jpg" alt="Home" width="80" height="80">
+      </button>
+    </a>
+  </div>
+
+   <h1>How the System Works?</h1>
+  <div class="boxes">
+    <p class="smalltitle">Step 1: Enter Your Data:</p>
+    <div class="overlay">
+      On the Home button, click Visit our Website, and the site will open with one option:<br>
+      Check Video Reliability <br>
+      To Evaluate the reliability of a TikTok video, you will need to provide a URL — please make sure it is a valid address.
+      <p class="examplebold">Example:</p>
+      https://vt.tiktok.com/ZSrG3AdKh/
+
+    </div>
+   <p class="smalltitle">Step 2: Processing:</p>
+    <div class="overlay">
+  
+
+This code is a Flask application (a small Python web server) that serves HTML pages and also handles requests for text credibility checking and video transcription.<br>
+
+ <p class="examplebold" >Libraries Used:</p>
+
+<p class="examplebold">Flask-</p>for creating the server and managing pages/requests.
+
+<p class="examplebold">yt_dlp-</p>used to download videos from YouTube or TikTok (a modern fork of youtube-dl).
+
+<p class="examplebold">ffmpeg-</p>converts the downloaded video into a WAV audio file so it can be processed.
+
+<p class="examplebold">whisper-</p>OpenAI’s model for transcribing audio files into text.
+
+<p class="examplebold">ssl-</p>adjusts SSL settings to allow connections even without a valid certificate.
+
+<p class="examplebold">os-</p>manages files (delete, check existence, join paths).
+
+<p class="examplebold">pandas (pd)-</p>loads a CSV file containing text samples and credibility data (used for fake news detection).
+<br>In addition, we used these libraries for machine learning, and a detailed code implementation is provided in the Jupyter Notebook. The notebook explains how we identified the most suitable classifier and evaluated its performance. Based on this process, we created a dataset containing all the results.
+
+
+<p class="examplebold">Video Transcription & Verification Flow (/transcribe):</p><br>
+
+ The client sends a JSON with a TikTok video link: <code>{"url": "&lt;video_url&gt;"}</code>.<br>
+
+ The server removes any leftover files (<code>video.mp4</code>, <code>audio.wav</code>) to start clean.<br>
+
+ <strong>Download:</strong> Using <code>yt_dlp</code>, the video is downloaded and saved as <code>video.mp4</code>.<br>
+
+ <strong>Audio extraction:</strong> Using <code>ffmpeg</code>, the audio track is extracted to <code>audio.wav</code> (mono, 16kHz, PCM).<br>
+
+ <strong>Transcription:</strong> A Whisper <code>base</code> model is loaded and called:<br>
+<code>result = whisper.load_model("base").transcribe("audio.wav", language="en")</code><br>
+The transcribed text is taken from <code>result["text"]</code> and trimmed.<br>
+
+ <strong>Dataset lookup:</strong> The full transcript is looked up in the CSV-backed DataFrame (<code>df</code>) by exact match on the <code>text</code> column:<br>
+<code>df["text"].str.strip() == transcript</code>.<br>
+
+ <strong>Response:</strong><br>
+&nbsp;&nbsp;• If the transcript is empty → <code>{"error": "No text received"}</code> (HTTP 400).<br>
+&nbsp;&nbsp;• If no matching row is found in the dataset → <code>{"error": "Text not found in dataset"}</code> (HTTP 404).<br>
+&nbsp;&nbsp;• If a match is found → the endpoint returns the saved verification fields:<br>
+<code>{
+ "Fake news check": "...",
+ "Reliability": &lt;float&gt;,
+ "Unreliability": &lt;float&gt;
+}</code><br>
+
+<br>
+<p>This flow combines three core libraries working together:</p>
+<ul>
+  <li><strong>yt_dlp</strong> – video download</li>
+  <li><strong>ffmpeg</strong> – audio extraction (WAV, mono, 16 kHz, PCM)</li>
+  <li><strong>whisper</strong> – speech-to-text transcription</li>
+</ul>
+<p>Additionally, <strong>pandas</strong> is used to search the dataset for an exact transcript match and return precomputed credibility results.</p>
+
+
+
+    </div>
+   <p class="smalltitle">Step 3: Results:</p> 
+    <div class="overlay">
+      <img  class="img1" src="/static/pictures/tiktok1.jpg" alt="תיאור של התמונה" ><br>
+     
+      The user enters a TikTok video link, clicks Transcribe, and the system processes the video to check its credibility. A loading message indicates progress until results are displayed."
+
+      <img  class="img2" src="/static/pictures/tiktok2.jpg" alt="תיאור של התמונה" ><br>
+In the text transcription image, you can view the final results: whether the video is reliable or unreliable (in other words, whether it represents a factual claim or just an opinion).
+The output also shows the percentage of credibility and the percentage of falsehood.
+This way, you can clearly see whether a given video, according to TikTok parameters, is considered credible or not.
+    </div>
+    
+   
+  </div>
+
+  
+</body>
+
+
+</html>
+  

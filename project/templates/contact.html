@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/contact.css') }}">
+  <link  rel="icon" type="image/png" href="/static/pictures/tiktokpic.jpeg">
+  <title>Contact Us</title>
+ 
+</head>
+<nav class="sidebar">
+  <a href="{{ url_for('about') }}">About</a>
+  <a href="{{ url_for('howto') }}">How-To-Use</a>
+  <a href="{{ url_for('contact') }}">Contact</a>
+
+  </ul>
+</nav>
+
+<body>
+  <div class="backtohp">
+    <a href="{{ url_for('home') }}">
+      <button>
+        <img src="/static/pictures/home.jpg" alt="Home" width="80" height="80">
+      </button>
+    </a>
+
+    <a href="{{ url_for('index') }}">
+      <button>
+        <img src="/static/pictures/left.jpg" alt="Home" width="80" height="80">
+      </button>
+    </a>
+  </div>
+
+
+  <p class="title">GET IN TOUCH</p>
+
+
+  <div class="box">
+    <div><img class="picture" src="/static/pictures/contact2.jpg" alt="תיאור של התמונה" >
+      <p class="middleadress">ADDRESS</p>
+      <p class="details">32 HaBarzel Street</p>
+      <p class="details">Ramat HaHayal</p>
+      <p class="details">Tel Aviv 69710,Israel</p>
+
+    </div>
+    <div> <img class="picture" src="/static/pictures/contact1.jpg" alt="תיאור של התמונה" >
+     <p class="middle">PHONE</p>
+     <p class="details">Gal Saban 052-6087250</p>
+     <p class="details">Yonatan Cohen 050-7309549</p>
+
+
+    </div>
+   <div><img class="picture" src="/static/pictures/contact3.jpg" alt="תיאור של התמונה" >
+    <p class="middle">EMAIL</p>
+    <p class="details">gsaban7@gmail.com</p>
+    <p class="details">yonico701@gmail.com</p>
+
+
+
+  </div>
+  </div>
+
+   
+  <iframe  class="editmap" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3379.49778807069!2d34.844286060430456!3d32.10985627405795!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d49eaddf88a0f%3A0x6cf00e470d279bc8!2z15TXkdeo15bXnCAzMiwg16rXnCDXkNeR15nXkS3Xmdek15U!5e0!3m2!1siw!2sil!4v1761474477846!5m2!1siw!2sil"
+   width="600" height="450" style="border:0;" allowfullscreen="" 
+   loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+  
+
+  
+</body>
+
+
+</html>
+  

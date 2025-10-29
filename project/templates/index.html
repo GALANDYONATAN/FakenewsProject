@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+  <link  rel="icon" type="image/png" href="/static/pictures/tiktokpic.jpeg">
+  <title>Welcome To Our Website!</title>
+</head>
+
+
+<nav class="sidebar">
+  <a href="{{ url_for('about') }}">About</a>
+  <a href="{{ url_for('howto') }}">How-To-Use</a>
+  <a href="{{ url_for('contact') }}">Contact</a>
+  </ul>
+</nav>
+<body>
+  
+
+  <div class="backtohp">
+    <a href="{{ url_for('home') }}">
+      <button>
+        <img src="/static/pictures/home.jpg" alt="Home" width="80" height="80">
+      </button>
+    </a>
+  </div>
+
+     <p class="title">Welcome to our Website!</p>
+  
+   <div class="overlay">
+   
+    <a href="{{ url_for('videopage') }}"><button >Check Video Reliability </button></a>
+    
+  </div>
+
+</body>
+
+
+</html>

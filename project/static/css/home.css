@@ -1,0 +1,132 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-image: url("/static/pictures/fake-news-detector-960.jpg"); /* התמונה שאתה שלחת */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  
+}
+
+.overlay {
+  background-color: rgba(255, 255, 255, 0.5); /* 60% אטימות */
+
+  border-radius: 20px;
+  padding: 40px 30px;
+ 
+  max-width: 600px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  box-sizing: border-box;
+  transition: transform 0.3s ease , box-shadow 0.3s ease;
+  width: 400px;   /* אפשר לבחור רוחב קבוע */
+  height:400px;  /* אותו גובה */
+  margin:auto;
+  display: flex;
+  flex-direction: column; /* אחד מתחת לשני */
+  justify-content: center;
+  gap: 35px;
+  margin-bottom: 130px; 
+  
+
+}
+
+.overlay a > button,
+.overlay button {
+  width: 60%;
+  box-sizing: border-box; /* למקרה של padding/גבול */
+}
+
+.overlay:hover {
+  transform: scale(1.03); /* הגדלה עדינה */
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.25); /* צל חזק יותר */
+}
+
+h1 {
+ color:white;
+ margin-top: 80px;   /* מוריד את הכותרת למטה */
+ text-align: center; /* מוודא שהיא במרכז */
+font-size: 50px;
+font-family: Verdana;
+text-shadow: 4px 4px 7px rgba(0,0,0,0.7);
+
+}
+
+
+input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 2px solid #007bff;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+
+button {
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: #2c4650f3;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  
+}
+
+button:hover {
+  background-color: #3e5870;
+  transform: scale(1.03);
+  font-weight: bold;
+}
+
+#result {
+  display:none ;
+  margin-top: 25px;
+  padding: 16px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  font-size: 16px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+
+}
+
+
+#Textresult {
+  display:none ;
+  margin-top: 25px;
+  padding: 16px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  font-size: 16px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+
+}
+
+
+footer {
+  background-color: rgba(0, 0, 0, 0.8);  /* רקע כהה */
+  color: white;                          /* טקסט לבן */
+  text-align: center;                    /* מרכז את הטקסט */
+  padding: 8px 15px; 
+  font-size: 14px;
+  position: fixed;                       /* מקבע לתחתית */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+ 
+}
+.editicon{
+  border-radius: 10px;
+}

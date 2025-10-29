@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+  <link  rel="icon" type="image/png" href="/static/pictures/tiktokpic.jpeg">
+  <title>Learn About Us</title>
+ 
+</head>
+
+
+<body>
+
+  <nav class="sidebar">
+    <a href="{{ url_for('about') }}">About</a>
+    <a href="{{ url_for('howto') }}">How-To-Use</a>
+    <a href="{{ url_for('contact') }}">Contact</a>
+  
+    </ul>
+  </nav>
+
+
+  <div class="backtohp">
+    <a href="{{ url_for('home') }}">
+      <button>
+        <img src="/static/pictures/home.jpg" alt="Home" width="80" height="80">
+      </button>
+    </a>
+        <a href="{{ url_for('index') }}">
+      <button>
+        <img src="/static/pictures/left.jpg" alt="Home" width="80" height="80">
+      </button>
+    </a>
+  </div>
+
+  <div class="content">
+    <img class="editimg" src="/static/pictures/rtsalmoi_.jpeg" alt="תיאור של התמונה" >
+    <div class="titleandmidtitle">
+      <h1>About Us</h1>
+      <p class="midtitle">Fake News Detector is a leading platform...</p>
+    </div>
+
+    <p class="description">
+      This project was developed as part of our academic studies at Ruppin Academic Center.
+      The main goal of the system is to provide automatic transcription of TikTok videos, with the option to also transcribe YouTube videos.
+      In addition, the system enables fake news detection using a machine learning model.
+      Users can input text manually and check its credibility based on various TikTok-related parameters.
+      We integrated advanced technologies such as Flask and Python, along with Whisper transcription libraries and NLP (Natural Language Processing) tools, 
+      to build a reliable and intelligent system.
+    </p>
+    <details id="read-more-box">
+>
+      <summary id="read-more-summary">Read More...</summary>
+      <p class="description">
+        We invite you to visit our website and try transcribing a video using TikTok, explore TikTok-related credibility parameters, or simply enter a text and quickly receive results indicating whether the content is reliable, 
+        along with relevant confidence percentages.
+        We live in a generation where people don’t want to waste their
+        time watching entire videos — the fastest way to consume information is through transcription.
+        We are continuously working to add more features in the future to improve the model and enhance transcription speed, with the goal of providing users with the most convenient service possible. Of course, we have also implemented algorithms that help identify common words in the language. In addition, we provide a clear guide on how to use the model, whether for text or video, and we warmly invite you to try it out.
+        We would also like to express our gratitude to Dr. Nadav Wolloch for his dedicated guidance and in-depth mentorship throughout every stage of the project.
+      </p>
+    </details>
+  </div>
+  
+  <script>
+  const details = document.getElementById('read-more-box');
+  const summary = document.getElementById('read-more-summary');
+
+  // קובע את הטקסט ההתחלתי לפי מצב האלמנט
+  summary.textContent = details.open ? 'Read Less...' : 'Read More...';
+
+  // מאזין לפתיחה/סגירה
+  details.addEventListener('toggle', () => {
+    summary.textContent = details.open ? 'Read Less...' : 'Read More...';
+  });
+</script>
+
+</body>
+
+
+</html>
+  
