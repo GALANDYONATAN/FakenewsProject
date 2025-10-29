@@ -78,7 +78,7 @@ def db_test():
 
 
 
-model = whisper.load_model("base")
+
 
 
 @app.route('/transcribe', methods=['POST'])
@@ -103,7 +103,7 @@ def transcribe():
         ).overwrite_output().run()
 
         # תמלול
-        
+        model = whisper.load_model("base")
         result = model.transcribe("audio.wav", language="en")
         transcription = (result.get("text") or "").strip()
         if not transcription:
