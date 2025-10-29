@@ -10,18 +10,10 @@ ssl._create_default_https_context = ssl._create_unverified_context
 app = Flask(__name__)
 
 
-import os, urllib.request
-
-MODEL_DIR = "project/models"
-os.makedirs(MODEL_DIR, exist_ok=True)
-
-MODEL_PATH = os.path.join(MODEL_DIR, "base.pt")
-MODEL_URL = os.environ.get("MODEL_URL")
-
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "model_pipeline.pkl")   # <<< ודא שקובץ זה קיים בצדך
 pipe = joblib.load(MODEL_PATH)
-MODEL_DIR = os.path.join(BASE_DIR, "models")
+
 
 
 DATABASE_URL = os.environ["DATABASE_URL"]
@@ -113,7 +105,7 @@ def transcribe():
         ).overwrite_output().run()
 
         # תמלול
-        model = whisper.load_model("base", download_root=MODEL_DIR)
+        model = whisper.load_model("base")
 
         result = model.transcribe("audio.wav", language="en")
         transcription = (result.get("text") or "").strip()
