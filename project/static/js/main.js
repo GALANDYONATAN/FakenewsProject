@@ -1,25 +1,37 @@
 function transcribe() {
   const url = document.getElementById('videoUrl').value;
   const resultDiv = document.getElementById('result'); 
-  const feature = document.getElementById('featureSelect').value; 
   resultDiv.style.display = 'block';
   resultDiv.innerText = "⏳ Please wait, this might take a few moments...";
+  
   fetch('/transcribe', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ url: url, feature: feature })
+      body: JSON.stringify({ url: url })
   })
   .then(res => res.json())
   .then(data => {
-        document.getElementById('result').innerText = `Fake news check: ${data["Fake news check"]}\n` +
-        `Reliability: ${data["Reliability"]}%\n` +
-        `Unreliability: ${data["Unreliability"]}%`;
-})
+      if (data.error) {
+          resultDiv.innerText = "❌ Error: " + data.error;
+          return;
+      }
+
+      resultDiv.innerText = 
+          `📝 Transcription: ${data.transcription || "N/A"}\n\n` +
+          `✅ Fake news check: ${data["Fake news check"]}\n` +
+          `📊 Reliability: ${data["Reliability"]}%\n` +
+          `📉 Unreliability: ${data["Unreliability"]}%\n\n` +
+          `🔗 Video URL: ${data.video_url || "N/A"}\n` +
+          `🆔 Record ID: ${data.id || "N/A"}\n` +
+          `📅 Created: ${data.created_at || "N/A"}\n` +
+          `🕒 Updated: ${data.updated_at || "N/A"}\n` +
+          `⚙️ Source: ${data.source || "N/A"}`;
+  })
   .catch(err => {
-        document.getElementById('result').innerText = "❌ Error during process: " + err;
-});
+      resultDiv.innerText = "❌ Error during process: " + err;
+  });
 }
 
 

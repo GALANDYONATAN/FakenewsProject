@@ -3,6 +3,7 @@ import yt_dlp, ffmpeg, whisper, ssl, os
 import webbrowser
 from threading import Timer
 import pandas as pd
+from sqlalchemy import create_engine, text
 
 
 # טיפול בתעודת SSL
@@ -10,6 +11,13 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 app = Flask(__name__)
 
+
+DATABASE_URL = os.environ["DATABASE_URL"]
+engine = create_engine(DATABASE_URL, connect_args={"sslmode": "require"})
+
+with engine.begin() as conn:
+    result = conn.execute(text("SELECT COUNT(*) FROM tiktok_data"))
+    print("Rows in tiktok_data:", result.scalar())
 
 
 @app.route("/")
@@ -53,12 +61,12 @@ def contact():
 
 
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))   # התיקייה של app.py (כלומר project/)
-CSV_PATH = os.path.join(BASE_DIR, "tiktok_predictions_full.csv")
-df = pd.read_csv(CSV_PATH)
+#BASE_DIR = os.path.dirname(os.path.abspath(__file__))   # התיקייה של app.py (כלומר project/)
+#CSV_PATH = os.path.join(BASE_DIR, "tiktok_predictions_full.csv")
+#df = pd.read_csv(CSV_PATH)
 
-@app.route('/transcribe', methods=['POST'])
-def transcribe():
+#@app.route('/transcribe', methods=['POST'])
+#def transcribe():
     try:
         data = request.get_json()
         video_url = data.get("url")
