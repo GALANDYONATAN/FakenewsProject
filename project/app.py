@@ -7,14 +7,8 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 app = Flask(__name__)
 
-# ==== Whisper model loaded once ====
-whisper_model = whisper.load_model("base")
 
-# ==== CSV load ====
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-CSV_PATH = os.path.join(BASE_DIR,"tiktok_predictions_full.csv")
 
-df = pd.read_csv(CSV_PATH)
 
 # ==== Routes ====
 @app.route("/")
@@ -56,6 +50,13 @@ def contact():
     return render_template("contact.html")
 
 
+# ==== CSV load ====
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CSV_PATH = os.path.join(BASE_DIR,"tiktok_predictions_full.csv")
+df = pd.read_csv(CSV_PATH)
+
+
+
 @app.route('/transcribe', methods=['POST'])
 def transcribe():
     try:
@@ -86,7 +87,7 @@ def transcribe():
             return jsonify({"error": "No text received"}), 400
 
         # חיפוש טקסט במסד
-        row = df[df["text"].str.strip() == textResult]
+        row = df[df["text"].str.strip()== textResult]
         if row.empty:
             return jsonify({"error": "Text not found in dataset"}), 404
 
