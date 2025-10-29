@@ -54,7 +54,7 @@ def contact():
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CSV_PATH = os.path.join(BASE_DIR,"tiktok_predictions_full.csv")
 df = pd.read_csv(CSV_PATH)
-
+model = whisper.load_model("base")
 
 
 @app.route('/transcribe', methods=['POST'])
@@ -83,12 +83,12 @@ def transcribe():
         ).overwrite_output().run()
 
         # תמלול
-        model = whisper.load_model("base")
+        
         result = model.transcribe("audio.wav", language="en")
         textResult = result["text"].strip()
 
 
-        
+
 
 
 
