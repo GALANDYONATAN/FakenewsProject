@@ -19,8 +19,8 @@ function transcribe() {
       }
 
       resultDiv.innerText = 
-          `Transcription: ${data.transcription || "N/A"}\n\n` +
-          ` Fake news check: ${data["Fake news check"]}\n` +
+          
+          ` Fake news check(opinion=Flase/claim=True): ${data["Fake news check"]}\n` +
           ` Reliability: ${data["Reliability"]}%\n` +
           ` Unreliability: ${data["Unreliability"]}%\n\n`;
 

@@ -80,9 +80,6 @@ def db_test():
 
 
 
-
-
-
 @app.route('/transcribe', methods=['POST'])
 def transcribe():
     try:
@@ -145,7 +142,6 @@ def transcribe():
 
         return jsonify({
            
-            "transcription": saved["transcription"],
             "Fake news check": "True" if saved["fake_news_check"] else "False",
             "Reliability": float(saved["reliability"]),
             "Unreliability": float(saved["unreliability"])
