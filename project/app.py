@@ -13,6 +13,7 @@ app = Flask(__name__)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "model_pipeline.pkl")   # <<< ודא שקובץ זה קיים בצדך
 pipe = joblib.load(MODEL_PATH)
+MODEL_DIR = os.path.join(BASE_DIR, "models")
 
 
 
@@ -102,7 +103,7 @@ def transcribe():
         ).overwrite_output().run()
 
         # תמלול
-        model = whisper.load_model("base")
+        model = whisper.load_model("base", download_root=MODEL_DIR)
         result = model.transcribe("audio.wav", language="en")
         transcription = (result.get("text") or "").strip()
         if not transcription:
