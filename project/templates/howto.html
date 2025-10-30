@@ -32,7 +32,7 @@
 
    <h1>How the System Works?</h1>
   <div class="boxes">
-    <p class="smalltitle">Step 1: Enter Your Data:</p>
+    <p class="smalltitle">Step 1: Enter Your Tik Tok Video:</p>
     <div class="overlay">
       On the Home button, click Visit our Website, and the site will open with one option:<br>
       Check Video Reliability <br>
@@ -61,49 +61,57 @@ This code is a Flask application (a small Python web server) that serves HTML pa
 
 <p class="examplebold">os-</p>manages files (delete, check existence, join paths).
 
-<p class="examplebold">pandas (pd)-</p>loads a CSV file containing text samples and credibility data (used for fake news detection).
-<br>In addition, we used these libraries for machine learning, and a detailed code implementation is provided in the Jupyter Notebook. The notebook explains how we identified the most suitable classifier and evaluated its performance. Based on this process, we created a dataset containing all the results.
-
-
 <p class="examplebold">Video Transcription & Verification Flow (/transcribe):</p><br>
 
- The client sends a JSON with a TikTok video link: <code>{"url": "&lt;video_url&gt;"}</code>.<br>
+The client sends JSON with a TikTok link: <code>{"url":"&lt;video_url&gt;"}</code>.<br>
 
- The server removes any leftover files (<code>video.mp4</code>, <code>audio.wav</code>) to start clean.<br>
+The server cleans temp files (<code>video.mp4</code>, <code>audio.wav</code>) if they exist.<br>
 
- <strong>Download:</strong> Using <code>yt_dlp</code>, the video is downloaded and saved as <code>video.mp4</code>.<br>
+<strong>Download</strong>: Using <code>yt_dlp</code>, the video is saved as <code>video.mp4</code>.<br>
 
- <strong>Audio extraction:</strong> Using <code>ffmpeg</code>, the audio track is extracted to <code>audio.wav</code> (mono, 16kHz, PCM).<br>
+<strong>Audio extraction</strong>: Using <code>ffmpeg</code>, audio is extracted to <code>audio.wav</code> (mono, 16 kHz, PCM).<br>
 
- <strong>Transcription:</strong> A Whisper <code>base</code> model is loaded and called:<br>
+<strong>Transcription</strong>: A Whisper <code>base</code> model is loaded and called:<br>
 <code>result = whisper.load_model("base").transcribe("audio.wav", language="en")</code><br>
-The transcribed text is taken from <code>result["text"]</code> and trimmed.<br>
+The transcript is taken from <code>result["text"]</code> and trimmed. If empty → 400.<br>
 
- <strong>Dataset lookup:</strong> The full transcript is looked up in the CSV-backed DataFrame (<code>df</code>) by exact match on the <code>text</code> column:<br>
-<code>df["text"].str.strip() == transcript</code>.<br>
-
- <strong>Response:</strong><br>
-&nbsp;&nbsp;• If the transcript is empty → <code>{"error": "No text received"}</code> (HTTP 400).<br>
-&nbsp;&nbsp;• If no matching row is found in the dataset → <code>{"error": "Text not found in dataset"}</code> (HTTP 404).<br>
-&nbsp;&nbsp;• If a match is found → the endpoint returns the saved verification fields:<br>
+<strong>Classification (pre-trained pipeline)</strong>: The transcript is passed to a pre-trained ML pipeline loaded at app start from<br>
+<code>model_pipeline.pkl</code> via <code>joblib.load</code>. The pipeline returns class probabilities:<br>
+<code>proba = pipe.predict_proba([text])[0]  # [P(opinion=0), P(claim=1)]</code><br>
+We compute:<br>
 <code>{
- "Fake news check": "...",
- "Reliability": &lt;float&gt;,
- "Unreliability": &lt;float&gt;
+   EXAMPLE:
+ "fake_news_check": True,
+ "Reliability": 50%,
+ "Unreliability": 60%
 }</code><br>
 
+<strong>Database UPSERT</strong>: Results are saved in PostgreSQL (<code>tiktok_data</code>) <br>
+ The DB returns the saved row.<br>
+
+
+
+<strong>Error handling</strong>: Any unexpected error → <code>{"error": "..."} </code> with HTTP 500.<br>
+
 <br>
-<p>This flow combines three core libraries working together:</p>
+<p><strong>Supporting routes</strong>:</p>
+<ul>
+  <li><code>GET /</code>, <code>/index</code>, <code>/about</code>, <code>/howto</code>, <code>/contact</code>, <code>/docs</code>, <code>/presentation</code>, <code>/videopage</code> – render templates.</li>
+  <li><code>GET /db_test</code> – returns <code>{"rows_in_tiktok_data": &lt;int&gt;}</code> (health check for DB connectivity).</li>
+</ul>
+
+<p><strong>Key libraries</strong>:</p>
 <ul>
   <li><strong>yt_dlp</strong> – video download</li>
   <li><strong>ffmpeg</strong> – audio extraction (WAV, mono, 16 kHz, PCM)</li>
   <li><strong>whisper</strong> – speech-to-text transcription</li>
+  <li><strong>scikit-learn + joblib</strong> – load & run the pre-trained pipeline (<code>model_pipeline.pkl</code>)</li>
+  <li><strong>SQLAlchemy</strong> – PostgreSQL connection & UPSERT logic</li>
+  <li><strong>pandas</strong> – available for analysis/logging (not required for the core flow)</li>
 </ul>
-<p>Additionally, <strong>pandas</strong> is used to search the dataset for an exact transcript match and return precomputed credibility results.</p>
 
 
 
-    </div>
    <p class="smalltitle">Step 3: Results:</p> 
     <div class="overlay">
       <img  class="img1" src="/static/pictures/tiktok1.jpg" alt="תיאור של התמונה" ><br>
