@@ -10,8 +10,25 @@ from sklearn.ensemble import RandomForestClassifier
 DATABASE_URL = os.environ["DATABASE_URL"]
 engine = create_engine(DATABASE_URL, connect_args={"sslmode": "require"})
 
+q = """
+WITH ranked AS (
+  SELECT
+    video_transcription_text,
+    claim_status,
+    reliability,
+    updated_at,
+    ROW_NUMBER() OVER (
+      PARTITION BY regexp_replace(lower(video_transcription_text), '\s+', ' ', 'g')
+      ORDER BY reliability DESC, updated_at DESC
+    ) AS rn
+  FROM tiktok_csv
+)
+SELECT video_transcription_text, claim_status
+FROM ranked
+WHERE rn = 1
+"""
 # שליפת נתונים מהטבלה המעודכנת
-df = pd.read_sql("SELECT video_transcription_text, claim_status FROM tiktok_csv", engine)
+df = pd.read_sql(q, engine)
 df = df.dropna(subset=["video_transcription_text", "claim_status"])
 
 # המרת תגיות למספרים
