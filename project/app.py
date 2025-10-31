@@ -119,7 +119,7 @@ def transcribe():
                 (video_url, transcription, fake_news_check, reliability, unreliability, source)
             VALUES
                 (:u, :t, :f, :r, :ur, :s)
-            ON CONFLICT (transcription) DO UPDATE
+            ON CONFLICT (video_url) DO UPDATE
             SET
                 video_url       = EXCLUDED.video_url,
                 fake_news_check = EXCLUDED.fake_news_check,
