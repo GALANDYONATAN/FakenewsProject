@@ -42,7 +42,7 @@ pipe = Pipeline([
 cv_params = {"rf__n_estimators": [75, 100, 200],
             "rf__max_depth": [5, 7, None],
              "rf__max_features": [0.3, 0.6],
-             "rf__max_samples": [0.7],          # אפשר גם להסיר אם אין צורך בסאב־סמפול
+             "rf__max_samples": [0.7],         
              "rf__min_samples_leaf": [1, 2],
              "rf__min_samples_split": [2, 3],
              
