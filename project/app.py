@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, "model_pipeline.pkl")   # <<< ודא שקובץ זה קיים בצדך
+MODEL_PATH = os.path.join(BASE_DIR, "model_pipeline_prod.pkl")   # <<< ודא שקובץ זה קיים בצדך
 pipe = joblib.load(MODEL_PATH)
 MODEL_DIR = os.path.join(BASE_DIR, "models")
 

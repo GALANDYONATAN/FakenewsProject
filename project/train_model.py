@@ -6,6 +6,8 @@ from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV,train_test_split
+from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score
+from sklearn.base import clone
 
 
 # חיבור למסד הנתונים
@@ -66,11 +68,37 @@ rf_cv = GridSearchCV(
 
 # אימון המודל
 rf_cv.fit(X_train, y_train)
+
+
+y_pred = rf_cv.predict(X_test)
+y_proba = rf_cv.predict_proba(X_test)[:, 1]  # להערכת ROC-AUC
+
+print("\nBest params (CV):", rf_cv.best_params_)
+print("Best CV recall:", rf_cv.best_score_)
+
+print("\n=== Test classification report ===")
+print(classification_report(y_test, y_pred, digits=3))
+
+print("\n=== Test confusion matrix ===")
+print(confusion_matrix(y_test, y_pred))
+
+print("\nTest ROC-AUC:", round(roc_auc_score(y_test, y_proba), 3))
+
+
 # שמירה לקובץ  
 best_pipe = rf_cv.best_estimator_
+
 
 MODEL_PATH = "model_pipeline.pkl"
 joblib.dump(best_pipe, MODEL_PATH)
 print(f" Model saved to {MODEL_PATH}")
 
 print(" Model trained successfully")
+
+
+final_pipe = clone(best_pipe)
+final_pipe.fit(X, y)
+
+PROD_MODEL_PATH = "model_pipeline_prod.pkl"
+joblib.dump(final_pipe, PROD_MODEL_PATH)
+print(f" Production model saved to {PROD_MODEL_PATH}")
