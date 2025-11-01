@@ -127,8 +127,7 @@ def transcribe():
                 unreliability   = EXCLUDED.unreliability,
                 source          = EXCLUDED.source,
                 updated_at      = NOW()
-            WHERE
-                EXCLUDED.reliability > tiktok_data.reliability
+            
             RETURNING
                 id, video_url, transcription, fake_news_check, reliability, unreliability, source, created_at, updated_at
         """)
