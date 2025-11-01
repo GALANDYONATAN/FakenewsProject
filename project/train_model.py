@@ -21,7 +21,7 @@ y = df["claim_status"].replace({"claim": 1, "opinion": 0})
 X = df["video_transcription_text"].astype(str)
 
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.15, stratify=y, random_state=42
+    X, y, test_size=0.2, stratify=y, random_state=42
 )
 
 
