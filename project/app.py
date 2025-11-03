@@ -1,8 +1,11 @@
 from flask import Flask, render_template, request, jsonify
 import yt_dlp, ffmpeg, whisper, ssl, os
 import pandas as pd
+import pickle
 from sqlalchemy import create_engine, text as sql_text
 import joblib
+
+
 
 # טיפול בתעודת SSL
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -12,13 +15,31 @@ app = Flask(__name__)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "model_pipeline_prod.pkl")   
-pipe = joblib.load(MODEL_PATH)
 MODEL_DIR = os.path.join(BASE_DIR, "models")
 
 
 
 DATABASE_URL = os.environ["DATABASE_URL"]
 engine = create_engine(DATABASE_URL, connect_args={"sslmode": "require"})
+
+def load_model_from_db_or_file():
+    try:
+        with engine.begin() as conn:
+            row = conn.execute(
+                sql_text("SELECT model_bytes FROM model_store ORDER BY id DESC LIMIT 1")
+            ).first()
+        if row and row[0]:
+            print("[BOOT] Loaded model from DB")
+            return pickle.loads(row[0])
+    except Exception as e:
+        print("[WARN] DB model load failed:", e)
+
+    print("[INFO] Falling back to PKL file:", MODEL_PATH)
+    return joblib.load(MODEL_PATH)
+
+
+pipe = load_model_from_db_or_file()
+
 
 
 def check_text(text: str):

@@ -8,6 +8,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV,train_test_split
 from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score
 from sklearn.base import clone
+import pickle
+from sqlalchemy import text as sql_text
 
 
 # חיבור למסד הנתונים
@@ -102,3 +104,21 @@ final_pipe.fit(X, y)
 PROD_MODEL_PATH = "model_pipeline_prod.pkl"
 joblib.dump(final_pipe, PROD_MODEL_PATH)
 print(f" Production model saved to {PROD_MODEL_PATH}")
+
+with engine.begin() as conn:
+    conn.execute(sql_text("""
+        CREATE TABLE IF NOT EXISTS model_store (
+            id BIGSERIAL PRIMARY KEY,
+            model_bytes BYTEA NOT NULL,
+            created_at TIMESTAMPTZ DEFAULT NOW()
+        );
+    """))
+
+model_blob = pickle.dumps(final_pipe)
+with engine.begin() as conn:
+    conn.execute(
+        sql_text("INSERT INTO model_store (model_bytes) VALUES (:b)"),
+        {"b": model_blob}
+    )
+
+print(" Model stored in DB (table: model_store)")
