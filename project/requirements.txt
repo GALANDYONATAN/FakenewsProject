@@ -1,4 +1,4 @@
-# --- Flask stack ---
+ #--- Flask stack ---
 Flask==3.1.2
 Werkzeug==3.1.3
 itsdangerous==2.2.0
@@ -7,7 +7,7 @@ click==8.3.0
 blinker==1.9.0
 MarkupSafe==3.0.3
 
-# --- Data / ML (pinned for sklearn 1.2.2 compatibility) ---
+#--- Data / ML (pinned for sklearn 1.2.2 compatibility) ---
 numpy==1.26.4
 scipy==1.10.1
 pandas==2.3.3
@@ -26,7 +26,7 @@ typing_extensions==4.15.0
 # --- Media / Download ---
 ffmpeg-python==0.2.0
 yt-dlp==2025.3.31
-# הערה: לא מתקינים ffmpeg כ-pip (מסומן אצלך כהערה); צריך ffmpeg במערכת (brew install ffmpeg)
+
 
 # --- HTTP / Utils ---
 requests==2.32.5
@@ -44,8 +44,8 @@ SQLAlchemy==2.0.36
 psycopg2-binary==2.9.9
 
 # --- (אופציונלי) numba/llvmlite — רק אם אתה באמת משתמש בהם בקוד שלך ---
-# numba==0.62.1
-# llvmlite==0.45.1
+ numba==0.62.1
+ llvmlite==0.45.1
 
 # --- Math / Sympy / NetworkX (לפי הרשימה שלך) ---
 sympy==1.14.0
@@ -55,3 +55,9 @@ networkx==3.5
 # --- fsspec / filelock (לפי הרשימה שלך) ---
 fsspec==2025.9.0
 filelock==3.20.0
+sentence-transformers==2.2.2
+transformers==4.30.2
+tokenizers==0.13.3
+
+
+
