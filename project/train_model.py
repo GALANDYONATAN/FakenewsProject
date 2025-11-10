@@ -24,9 +24,7 @@ import sklearn
 import sentence_transformers as st_pkg
 
 
-# --------------------------
-# 1) חיבור DB וטעינת דאטה (CLAIM)
-# --------------------------
+
 DATABASE_URL = os.environ["DATABASE_URL"]
 engine = create_engine(DATABASE_URL, connect_args={"sslmode": "require"})
 
@@ -49,9 +47,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 
-# ------------------------------------------
-# 2) טרנספורמר לאמבדינגים של Sentence-Transformers
-# ------------------------------------------
+
 class SentenceEncoder(BaseEstimator, TransformerMixin):
     def __init__(self, model_name="all-MiniLM-L6-v2", device=None, batch_size=64, normalize=False):
         self.model_name = model_name
@@ -73,10 +69,7 @@ class SentenceEncoder(BaseEstimator, TransformerMixin):
         )
 
 
-# ------------------------------------------
-# 3) CLAIM: Embedding → Scale → MLP → Calibration (+ threshold ע"פ Recall@Precision)
-# ------------------------------------------
-embed_model_name = "all-MiniLM-L6-v2"
+
 
 base_claim = Pipeline(steps=[
     ("embed", SentenceEncoder(model_name=embed_model_name, normalize=False)),
@@ -138,10 +131,7 @@ print("\n[REPORT]\n", classification_report(y_test, y_pred, target_names=["opini
 print("[CONFUSION]\n", confusion_matrix(y_test, y_pred))
 
 
-# ------------------------------------------
-# 4) SENTIMENT (אופציונלי): ST+MLP+Calibration
-#    מחפש עמודה sentiment_label בטבלה. אם אין – מדלג.
-# ------------------------------------------
+
 sent_pipe = None
 labels_sentiment = None
 sent_metrics = None
@@ -192,12 +182,12 @@ try:
         yS_prob = sent_pipe_cal.predict_proba(XS_test)
         yS_pred = sent_pipe_cal.predict(XS_test)
 
-        # מדדים בסיסיים (דיוק, F1 מאקרו)
+        
         sent_acc = accuracy_score(yS_test, yS_pred)
         sent_f1_macro = f1_score(yS_test, yS_pred, average="macro", zero_division=0)
         print(f"[METRICS] SENTIMENT Acc: {sent_acc:.3f} | Macro-F1: {sent_f1_macro:.3f}")
 
-        # שמירת המחלקות (סדר) לשימוש בצד השרת
+       
         labels_sentiment = list(getattr(sent_pipe_cal, "classes_", []))
         sent_pipe = sent_pipe_cal
         sent_metrics = {"accuracy": float(sent_acc), "macro_f1": float(sent_f1_macro)}
@@ -209,9 +199,7 @@ except Exception as e:
     print("[SENTIMENT] Skipped (reason):", e)
 
 
-# --------------------------
-# 5) בניית bundle ושמירה לקבצים/DB
-# --------------------------
+
 bundle = {
     "claim_pipe": claim_pipe,
     "embed_model_name": embed_model_name,
@@ -248,7 +236,7 @@ PROD_MODEL_PATH = "model_pipeline_prod.pkl"
 joblib.dump(bundle, PROD_MODEL_PATH)
 print(f"[SAVE] Bundle saved to {PROD_MODEL_PATH}")
 
-# שמירה גם ל-DB (model_store)
+
 #with engine.begin() as conn:
     #conn.execute(sql_text("""
         #CREATE TABLE IF NOT EXISTS model_store (
